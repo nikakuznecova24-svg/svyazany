@@ -86,14 +86,16 @@ h1.big{font-size:clamp(24px,5vw,36px);line-height:1.16;margin:0 0 .35em}
   position:relative;
   background:var(--wine);
   background-image:
-    radial-gradient(600px circle at 12% 0%, rgba(255,251,246,0.06), transparent 55%),
-    radial-gradient(600px circle at 90% 100%, rgba(255,251,246,0.05), transparent 55%);
+    radial-gradient(600px circle at 12% 0%, rgba(255,251,246,0.05), transparent 55%),
+    radial-gradient(600px circle at 90% 100%, rgba(255,251,246,0.04), transparent 55%);
   color:var(--cream);
-  border:1px solid var(--wine-deep);
-  box-shadow:0 0 0 1px rgba(255,251,246,0.14) inset, 0 10px 40px rgba(90,26,43,0.25);
-  padding:44px 34px 40px;
+  border-style:solid;
+  border-width:78px 60px;
+  border-image:url("assets/rose-frame.png") 150 112 / 78px 60px / 0 round;
+  padding:6px 10px 10px;
   margin:30px 0
 }
+@media(max-width:640px){.scroll{border-width:52px 34px;border-image-slice:150 112;border-image-width:52px 34px}}
 
 
 
