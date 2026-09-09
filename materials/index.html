@@ -20,7 +20,7 @@
   --rose:#B98A7B;
 }
 *{box-sizing:border-box}
-html,body{margin:0;padding:0}
+html,body{margin:0;padding:0;overflow-x:hidden}
 body{
   background-color:var(--cream);
   background-image:
@@ -166,6 +166,8 @@ input:focus,textarea:focus{outline:none;border-color:var(--wine)}
 .spread .c-list li{padding-left:16px;position:relative;line-height:1.6}
 .spread .c-list li::before{content:"— ";position:absolute;left:0;color:var(--wine)}
 .spread .c-hint{color:var(--ink-soft)}
+.spread .body p{overflow-wrap:anywhere}
+.c-optnote a{color:var(--wine);text-decoration:underline}
 .spread .body p{margin:0 0 8px}
 
 
@@ -275,15 +277,15 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
         <p class="qsub">впиши пару слов о человеке — и увидишь, как будет выглядеть страница о нём</p>
       </div>
     </div>
-    <div class="c-note">чем подробнее ответишь — тем объёмнее и глубже получится страница. ничего не сохраняется, это эскиз для тебя.<span class="c-note-sub">поля со звёздочкой обязательны, остальное — по желанию</span></div>
+    <div class="c-note">чем подробнее ответишь — тем объёмнее и глубже получится страница. ничего не сохраняется, это эскиз для тебя.<span class="c-note-sub">поля со звёздочкой обязательны, остальное — по желанию · это пример, замени на своё</span></div>
 
     <div class="field">
-      <label for="c-name">имя человека <span class="req">*</span></label>
-      <input id="c-name" type="text" maxlength="40" placeholder="например, папа">
+      <label for="c-name">как зовут человека <span class="req">*</span></label>
+      <input id="c-name" type="text" maxlength="40" placeholder="например: папа, мама, лучшая подруга" value="папа">
     </div>
     <div class="field">
-      <label for="c-occ">повод</label>
-      <input id="c-occ" type="text" maxlength="70" placeholder="например, к 60-летию — или «просто так»">
+      <label for="c-occ">к чему эта книга</label>
+      <input id="c-occ" type="text" maxlength="70" placeholder="например: к 60-летию — или просто так" value="к 60-летию">
     </div>
     <div class="field">
       <span class="label-row">о ком речь</span>
@@ -293,22 +295,24 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
       </div>
     </div>
     <div class="field">
-      <label for="c-life">чем живёт сейчас</label>
-      <input id="c-life" type="text" maxlength="180" placeholder="например: работает на заводе, возится в гараже">
+      <label for="c-life">чем он живёт сейчас — работа, увлечения, обычный день</label>
+      <input id="c-life" type="text" maxlength="180" placeholder="например: работает на заводе, а по выходным пропадает в гараже" value="работает на заводе, а по выходным пропадает в гараже">
     </div>
     <div class="field">
-      <label for="c-path">что прошёл в прошлом</label>
-      <input id="c-path" type="text" maxlength="180" placeholder="например: развод и переезд в другой город; или растил детей один">
+      <label for="c-path">что он прошёл в прошлом — что сделало его сильнее</label>
+      <input id="c-path" type="text" maxlength="180" placeholder="например: один поднял троих детей, пережил тяжёлые девяностые" value="один поднял троих детей, пережил тяжёлые девяностые">
     </div>
     <div class="field">
-      <label for="c-str">сильные стороны — через запятую</label>
-      <input id="c-str" type="text" maxlength="180" placeholder="например: надёжный, спокойный, руки золотые">
+      <label for="c-str">три-четыре слова о характере</label>
+      <input id="c-str" type="text" maxlength="180" placeholder="например: надёжный, спокойный, руки золотые" value="надёжный, спокойный, руки золотые, справедливый">
     </div>
 
     <div class="field">
       <label for="c-a1">какой момент с ним хочется прожить ещё раз <span class="req">*</span></label>
-      <input id="c-a1" type="text" maxlength="220" placeholder="ответ от лица человека">
+      <input id="c-a1" type="text" maxlength="220" placeholder="например: когда мы всей семьёй поехали к морю на старой машине без плана" value="когда мы всей семьёй поехали к морю на старой машине без плана">
     </div>
+
+    <p class="c-optnote"><a href="#" id="c-clear">начать с чистого листа</a></p>
 
     <div class="spread" id="c-spread">
       <div class="who" id="c-who">имя в деталях</div>
@@ -318,9 +322,10 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
       <img class="sign" src="assets/logo.png" alt="связаны">
     </div>
 
-    <p class="small" style="text-align:center;margin-top:18px">это набросок одной страницы. вся книга собирается из десятков таких.</p>
-    <div class="btnrow" style="justify-content:center">
+    <p class="small" style="text-align:center;margin-top:18px">это всего одна страница — и уже трогает. представь целую книгу о нём.</p>
+    <div class="btnrow" style="justify-content:center;flex-wrap:wrap;gap:12px">
       <a class="btn solid" href="https://svyazany.ru">выбрать формат</a>
+      <button type="button" class="btn" id="c-save">сохранить эскиз картинкой</button>
     </div>
   </section>
 
@@ -343,6 +348,7 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
 
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
 (function(){
   var $=function(id){return document.getElementById(id);};
@@ -357,6 +363,9 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
   function trimPunct(s){return tr(s).replace(/^[\s.,;:—-]+|[\s.,;:—-]+$/g,'');}
   function gv(){var r=document.querySelector('input[name="c-g"]:checked');return r?r.value:'m';}
   function G(m,f){return gv()==='f'?f:m;}
+  function words(s){return s?s.split(/\s+/).filter(Boolean).length:0;}
+  function hash(s){var n=5381;for(var i=0;i<s.length;i++)n=((n<<5)+n+s.charCodeAt(i))>>>0;return n;}
+  function pick(arr,seed){return arr[hash(seed)%arr.length];}
 
   function render(){
     var name=lc(nameEl.value);
@@ -374,44 +383,91 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
       return;
     }
 
+    var seed=(name||'x')+'|'+occ+'|'+gv();
     var h='';
     if(occ) h+='<p class="c-occ">'+esc(lc(occ))+'</p>';
 
-    // вступление — безопасно при любом вводе
-    h+='<p><b>'+nm+'</b> — этот выпуск о том, кто '+G('он','она')+' на самом деле: что за '+G('ним','ней')+' стоит и почему '+G('его','её')+' хочется знать не в двух словах.';
-    if(strs.length) h+=' если коротко — '+strs.map(esc).join(', ')+'.';
+    var INTRO=[
+      '<b>'+nm+'</b> — этот выпуск о том, кто '+G('он','она')+' на самом деле: не в двух словах, а по-настоящему.',
+      'про <b>'+nm+'</b> обычно говорят коротко. здесь — так, как '+G('он','она')+' того стоит.',
+      '<b>'+nm+'</b>. кажется, что '+G('его','её')+' знаешь — а потом открываешь такую книгу и понимаешь, сколько всего осталось за кадром.',
+      '<b>'+nm+'</b> — человек, которого хочется знать глубже, чем позволяет обычный день. с этого выпуска и начнём.'
+    ];
+    h+='<p>'+pick(INTRO,seed+'i');
+    if(strs.length){
+      var LEAD=['если совсем коротко — ','первое, что скажут те, кто рядом — ','если одним движением — '];
+      h+=' '+pick(LEAD,seed+'l')+strs.map(esc).join(', ')+'.';
+      if(strs.length>=4) h+=' и это только то, что на поверхности.';
+    }
     h+='</p>';
 
-    // чем живёт
     if(life){
-      h+='<p class="c-sub">чем живёт сейчас</p><p>'+esc(life)+'.</p>';
-    }
-    // что позади
-    if(path){
-      h+='<p class="c-sub">что осталось позади</p><p>'+esc(path)+'. это часть '+G('его','её')+' пути — и часть того, кто '+G('он','она')+' сейчас.</p>';
+      h+='<p class="c-sub">чем живёт сейчас</p><p>'+esc(life)+'.';
+      if(words(life)>=6) h+=' за этим — целый уклад: ритм, привычки и дела, по которым '+G('его','её')+' и узнают.';
+      h+='</p>';
     }
 
-    // сильные стороны
+    if(path){
+      h+='<p class="c-sub">что осталось позади</p><p>'+esc(path)+'.';
+      if(words(path)>=6) h+=' об этом редко рассказывают вслух — а ведь именно такое и делает человека тем, кто '+G('он','она')+' есть.';
+      h+='</p>';
+    }
+
     if(strs.length){
-      h+='<p class="c-sub">сильные стороны</p><p>те, кто рядом, узнают '+G('его','её')+' по этому:</p><ul class="c-list">';
+      var STR_LEAD=['те, кто рядом, узнают '+G('его','её')+' по этому:','за что '+G('его','её')+' любят и на что опираются:','этим '+G('он','она')+' и запоминается:'];
+      h+='<p class="c-sub">сильные стороны</p><p>'+pick(STR_LEAD,seed+'s')+'</p><ul class="c-list">';
       strs.forEach(function(s){h+='<li>'+esc(s)+'</li>';});
       h+='</ul>';
     }
 
-    // интервью (один вопрос, по желанию)
     if(iva){
       h+='<p class="c-sub">интервью</p>';
       h+='<p class="c-q">— какой момент '+G('с ним','с ней')+' хочется прожить ещё раз</p><p>'+esc(iva)+'</p>';
     }
 
-    // несколько слов
-    h+='<p class="c-sub">несколько слов</p><p>этот выпуск — чтобы <b>'+nm+'</b> однажды '+G('открыл','открыла')+' его и '+G('почувствовал','почувствовала')+': '+G('его','её')+' путь важен, и рядом есть люди, которые это видят и хранят.</p>';
+    var CLOSE=[
+      'эта книга — чтобы <b>'+nm+'</b> однажды '+G('открыл','открыла')+' её и '+G('почувствовал','почувствовала')+': '+G('его','её')+' путь важен, и рядом есть люди, которые это видят.',
+      'хочется, чтобы <b>'+nm+'</b> '+G('прочитал','прочитала')+' это и '+G('понял','поняла')+', как много о '+G('нём','ней')+' можно сказать с теплом.',
+      'такие страницы собирают не ради красоты — а чтобы человек '+G('увидел','увидела')+' себя '+G('любимым','любимой')+' со стороны.',
+      'и это только начало. дальше — целая книга, где '+G('его','её')+' история рассказана бережно и подробно.'
+    ];
+    h+='<p class="c-sub">несколько слов</p><p>'+pick(CLOSE,seed+'c');
+    if(occ) h+=' '+esc(lc(occ))+' — и это уже достаточная причина.';
+    h+='</p>';
 
     bodyEl.innerHTML=h;
   }
 
   [nameEl,occEl,lifeEl,pathEl,strEl,ivEl].forEach(function(el){if(el)el.addEventListener('input',render);});
   Array.prototype.forEach.call(document.querySelectorAll('input[name="c-g"]'),function(el){el.addEventListener('change',render);});
+
+  // очистить поля
+  var clr=$('c-clear');
+  if(clr) clr.addEventListener('click',function(e){
+    e.preventDefault();
+    [nameEl,occEl,lifeEl,pathEl,strEl,ivEl].forEach(function(el){if(el)el.value='';});
+    var m=document.querySelector('input[name="c-g"][value="m"]'); if(m)m.checked=true;
+    render(); nameEl.focus();
+  });
+
+  // сохранить эскиз картинкой
+  var sv=$('c-save');
+  if(sv) sv.addEventListener('click',function(){
+    var node=$('c-spread'); if(!node) return;
+    var label=sv.textContent; sv.textContent='готовлю…';
+    var reset=function(){sv.textContent=label;};
+    if(typeof html2canvas!=='function'){ try{window.print();}catch(e){} reset(); return; }
+    html2canvas(node,{backgroundColor:'#FAF6F0',scale:2,useCORS:true,onclone:function(doc){
+      var s=doc.getElementById('c-spread');
+      if(s){ s.style.backgroundImage='none'; s.style.boxShadow='none'; }
+    }}).then(function(canvas){
+      var a=document.createElement('a');
+      a.download='связаны-эскиз.png';
+      a.href=canvas.toDataURL('image/png');
+      document.body.appendChild(a); a.click(); a.remove(); reset();
+    }).catch(function(){ try{window.print();}catch(e){} reset(); });
+  });
+
   render();
 })();
 </script>
