@@ -87,17 +87,16 @@ h1.big{font-size:clamp(24px,5vw,36px);line-height:1.16;margin:0 0 .35em}
   position:relative;
   background:var(--wine);
   color:var(--cream);
-  padding:78px 64px 70px;
+  padding:70px 62px 64px;
   margin:30px 0
 }
 .scroll::before{
   content:"";position:absolute;inset:0;
-  border:64px solid transparent;
-  border-image:url("assets/rose-frame.png") 150 112 / 64px / 0 round;
+  background:url("assets/rose-frame.png") center/100% 100% no-repeat;
   pointer-events:none
 }
 .scroll > *{position:relative}
-@media(max-width:640px){.scroll{padding:50px 34px 44px}.scroll::before{border-width:44px;border-image-width:44px}}
+@media(max-width:640px){.scroll{padding:44px 32px 40px}}
 
 
 
