@@ -616,8 +616,8 @@ main{padding-top:72px;}
   transition:transform .3s ease, box-shadow .3s ease;
 }
 .price-card:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(58,20,32,0.14);}
-.price-card .label{line-height:1;margin-bottom:0;}
-.price-card h3{font-size:24px;margin:-6px 0 16px;}
+.price-card .label{line-height:1;margin-bottom:8px;}
+.price-card h3{font-size:24px;margin:0 0 16px;}
 .price-tag{font-family:'Fraunces',serif;font-size:26px;color:var(--wine-bright);margin:auto 0 0 0;text-align:right;font-variant-numeric: oldstyle-nums;font-feature-settings: "onum" 1;}
 .price-card .check-list{margin-bottom:28px;flex-grow:1;}
 .price-card-featured{
@@ -626,7 +626,8 @@ main{padding-top:72px;}
   box-shadow:0 20px 44px rgba(58,20,32,0.3);
   position:relative;
   overflow:hidden;
-  padding-top:64px;
+  padding-top:40px;
+  padding-bottom:64px;
 }
 .price-card-featured::before{
   content:"";
@@ -640,19 +641,22 @@ main{padding-top:72px;}
 .price-card-featured .label{color:#FFFBF6;}
 .price-card-badge{
   position:absolute;
-  top:16px;
-  right:16px;
+  top:auto;
+  bottom:18px;
+  left:24px;
   z-index:1;
-  background:rgba(244,238,225,0.14);
-  border:1px solid rgba(244,238,225,0.35);
-  color:#FFFBF6;
-  font-family:'EB Garamond',serif;
-  font-size:12px;
-  
-  padding:6px 14px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:#FAF6F1;
+  border:1px solid rgba(107,31,51,0.22);
+  color:var(--wine-bright);
+  padding:6px 11px;
   border-radius:20px;
+  line-height:0;
   white-space:nowrap;
 }
+.price-card-badge svg{display:block;}
 
 /* ===== price card wine glow (soft radial light in corner) ===== */
 .price-card-glow{
@@ -1827,17 +1831,11 @@ i,em,cite,address{font-style:normal}
   <!-- ============ ORDER ============ -->
   <section class="view" id="view-order">
     <div class="wrap page-head">
-      <h1>Расскажите о вашей <span class="script" style="font-size:1.25em;">истории</span></h1>
-      <p class="hero-sub" style="max-width:600px;">Заполните форму — я свяжусь с вами в Telegram, чтобы обсудить
-        детали и формат.</p>
+      <h1>с вашего рассказа начинается <span class="script" style="font-size:1.25em;">книга</span></h1>
+      <p class="hero-sub" style="max-width:600px;">несколько строк о человеке и поводе — остальное я возьму на себя. отвечу в течение дня.</p>
     </div>
 
     
-    <div class="wrap fmtq" id="fmtq">
-      <h2 class="fmtq-h">не знаете, какой формат выбрать?</h2>
-      <p class="fmtq-sub">три вопроса — и подскажем подходящую книгу.</p>
-      <div class="fmtq-body" id="fmtqBody"></div>
-    </div>
 
     <div class="wrap order-wrap">
       <div class="order-card">
@@ -1927,32 +1925,8 @@ i,em,cite,address{font-style:normal}
           <span class="badge-pill"><span class="badge-pill-mark">✦</span> подарок себе</span>
         </div>
 
-        <p class="price-tag" style="font-size:24px;">от 5 490 ₽</p>
-        <a class="btn-primary" data-nav="order" id="soulDetailOrderBtn">Выбрать формат и заказать</a>
       </div>
 
-      <div class="product-detail-section">
-        <p class="label">Заглянуть внутрь</p>
-        <h2 class="wide-h2" style="margin-left:0;">Примеры разворотов</h2>
-        <p class="product-detail-lead">Несколько страниц из готовых журналов — листайте стрелками
-          или свайпом.</p>
-
-        <div class="spreads-carousel-wrap">
-          <div class="spreads-carousel" id="spreadsCarousel">
-            <div class="spreads-track" id="spreadsTrack">
-              <div class="spread-card ph-soul"><span class="ph-placeholder-text">разворот 1<br>скоро здесь</span></div>
-              <div class="spread-card ph-wedding"><span class="ph-placeholder-text">разворот 2<br>скоро здесь</span></div>
-              <div class="spread-card ph-family"><span class="ph-placeholder-text">разворот 3<br>скоро здесь</span></div>
-              <div class="spread-card ph-tale"><span class="ph-placeholder-text">разворот 4<br>скоро здесь</span></div>
-              <div class="spread-card ph-friendship"><span class="ph-placeholder-text">разворот 5<br>скоро здесь</span></div>
-              <div class="spread-card ph-diary"><span class="ph-placeholder-text">разворот 6<br>скоро здесь</span></div>
-            </div>
-            <button type="button" class="spreads-arrow spreads-arrow-prev" id="spreadPrev" aria-label="Предыдущий разворот">‹</button>
-            <button type="button" class="spreads-arrow spreads-arrow-next" id="spreadNext" aria-label="Следующий разворот">›</button>
-          </div>
-          <div class="spreads-dots" id="spreadsDots"></div>
-        </div>
-      </div>
 
       <div class="product-detail-section">
         <p class="label">Что внутри</p>
@@ -2103,7 +2077,7 @@ i,em,cite,address{font-style:normal}
             <p class="price-tag">6 490 ₽</p>
           </div>
           <div class="price-card price-card-featured price-card-featured-glow">
-            <span class="price-card-badge">самый популярный тариф</span>
+            <span class="price-card-badge" aria-label="самый популярный формат"><svg width="11" height="14" viewBox="0 0 11 14" fill="currentColor" aria-hidden="true"><path d="M5.5 0C5.8 2.4 4 3.6 2.8 5.2 1.9 6.4 1.2 7.8 1.2 9.2A4.3 4.3 0 0 0 9.8 9.2c0-1.6-.7-2.9-1.7-4.2-.6.7-1.4 1-2 .6.9-1.7 1-3.8-.6-5.6Z"/></svg></span>
             <p class="label" style="color:#FFFBF6;">32 страницы</p>
             <h3 style="color:#FFFBF6;">Полное погружение</h3>
             <p style="color:#FFFBF6;font-size:16px;">9–10 разделов — все смысловые блоки,
@@ -2170,7 +2144,7 @@ i,em,cite,address{font-style:normal}
           </div>
           <div class="included-item">
             <span class="included-icon">✓</span>
-            <p>Электронная PDF-версия журнала в подарок</p>
+            <p>Согласование текста и вёрстки на каждом этапе</p>
           </div>
         </div>
       </div>
@@ -2215,30 +2189,8 @@ i,em,cite,address{font-style:normal}
           <span class="badge-pill"><span class="badge-pill-mark">✦</span> новый этап жизни</span>
         </div>
 
-        <p class="price-tag" style="font-size:24px;">от 2 990 ₽</p>
-        <a class="btn-primary" data-nav="order" id="taleDetailOrderBtn">Выбрать формат и заказать</a>
       </div>
 
-      <div class="product-detail-section">
-        <p class="label">Заглянуть внутрь</p>
-        <h2 class="wide-h2" style="margin-left:0;">Примеры разворотов</h2>
-        <p class="product-detail-lead">Несколько страниц из готовых книг-сказок — листайте стрелками
-          или свайпом.</p>
-
-        <div class="spreads-carousel-wrap">
-          <div class="spreads-carousel" id="taleSpreadsCarousel">
-            <div class="spreads-track" id="taleSpreadsTrack">
-              <div class="spread-card ph-tale"><span class="ph-placeholder-text">разворот 1<br>скоро здесь</span></div>
-              <div class="spread-card ph-friendship"><span class="ph-placeholder-text">разворот 2<br>скоро здесь</span></div>
-              <div class="spread-card ph-soul"><span class="ph-placeholder-text">разворот 3<br>скоро здесь</span></div>
-              <div class="spread-card ph-diary"><span class="ph-placeholder-text">разворот 4<br>скоро здесь</span></div>
-            </div>
-            <button type="button" class="spreads-arrow spreads-arrow-prev" id="taleSpreadPrev" aria-label="Предыдущий разворот">‹</button>
-            <button type="button" class="spreads-arrow spreads-arrow-next" id="taleSpreadNext" aria-label="Следующий разворот">›</button>
-          </div>
-          <div class="spreads-dots" id="taleSpreadsDots"></div>
-        </div>
-      </div>
 
       <div class="product-detail-section">
         <p class="label">Что внутри</p>
@@ -2354,7 +2306,7 @@ i,em,cite,address{font-style:normal}
             <p class="price-tag">2 990 ₽</p>
           </div>
           <div class="price-card price-card-featured price-card-featured-glow">
-            <span class="price-card-badge">самый популярный тариф</span>
+            <span class="price-card-badge" aria-label="самый популярный формат"><svg width="11" height="14" viewBox="0 0 11 14" fill="currentColor" aria-hidden="true"><path d="M5.5 0C5.8 2.4 4 3.6 2.8 5.2 1.9 6.4 1.2 7.8 1.2 9.2A4.3 4.3 0 0 0 9.8 9.2c0-1.6-.7-2.9-1.7-4.2-.6.7-1.4 1-2 .6.9-1.7 1-3.8-.6-5.6Z"/></svg></span>
             <p class="label" style="color:#FFFBF6;">16–20 страниц</p>
             <h3 style="color:#FFFBF6;">Классическая сказка</h3>
             <p style="color:#FFFBF6;font-size:16px;">Больше иллюстраций и деталей истории, плотная
@@ -2436,7 +2388,7 @@ i,em,cite,address{font-style:normal}
           </div>
           <div class="included-item">
             <span class="included-icon">✓</span>
-            <p>Электронная PDF-версия журнала в подарок</p>
+            <p>Согласование текста и вёрстки на каждом этапе</p>
           </div>
         </div>
       </div>
@@ -2478,30 +2430,8 @@ i,em,cite,address{font-style:normal}
           <span class="badge-pill"><span class="badge-pill-mark">✦</span> день рождения партнёра</span>
         </div>
 
-        <p class="price-tag" style="font-size:24px;">от 5 490 ₽</p>
-        <a class="btn-primary" data-nav="order" id="loveDetailOrderBtn">Выбрать формат и заказать</a>
       </div>
 
-      <div class="product-detail-section">
-        <p class="label">Заглянуть внутрь</p>
-        <h2 class="wide-h2" style="margin-left:0;">Примеры разворотов</h2>
-        <p class="product-detail-lead">Несколько страниц из готовых книг про любовь — листайте стрелками
-          или свайпом.</p>
-
-        <div class="spreads-carousel-wrap">
-          <div class="spreads-carousel" id="loveSpreadsCarousel">
-            <div class="spreads-track" id="loveSpreadsTrack">
-              <div class="spread-card ph-love"><span class="ph-placeholder-text">разворот 1<br>скоро здесь</span></div>
-              <div class="spread-card ph-personal"><span class="ph-placeholder-text">разворот 2<br>скоро здесь</span></div>
-              <div class="spread-card ph-soul"><span class="ph-placeholder-text">разворот 3<br>скоро здесь</span></div>
-              <div class="spread-card ph-family"><span class="ph-placeholder-text">разворот 4<br>скоро здесь</span></div>
-            </div>
-            <button type="button" class="spreads-arrow spreads-arrow-prev" id="loveSpreadPrev" aria-label="Предыдущий разворот">‹</button>
-            <button type="button" class="spreads-arrow spreads-arrow-next" id="loveSpreadNext" aria-label="Следующий разворот">›</button>
-          </div>
-          <div class="spreads-dots" id="loveSpreadsDots"></div>
-        </div>
-      </div>
 
       <div class="product-detail-section">
         <p class="label">Для кого и для какого повода</p>
@@ -2669,7 +2599,7 @@ i,em,cite,address{font-style:normal}
             <p class="price-tag">5 490 ₽</p>
           </div>
           <div class="price-card price-card-featured price-card-featured-glow">
-            <span class="price-card-badge">самый популярный тариф</span>
+            <span class="price-card-badge" aria-label="самый популярный формат"><svg width="11" height="14" viewBox="0 0 11 14" fill="currentColor" aria-hidden="true"><path d="M5.5 0C5.8 2.4 4 3.6 2.8 5.2 1.9 6.4 1.2 7.8 1.2 9.2A4.3 4.3 0 0 0 9.8 9.2c0-1.6-.7-2.9-1.7-4.2-.6.7-1.4 1-2 .6.9-1.7 1-3.8-.6-5.6Z"/></svg></span>
             <p class="label" style="color:#FFFBF6;">28 страниц</p>
             <h3 style="color:#FFFBF6;">Классический формат</h3>
             <p style="color:#FFFBF6;font-size:16px;">8 разделов — добавляется язык любви, традиции пары
@@ -2749,7 +2679,7 @@ i,em,cite,address{font-style:normal}
           </div>
           <div class="included-item">
             <span class="included-icon">✓</span>
-            <p>Электронная PDF-версия журнала в подарок</p>
+            <p>Согласование текста и вёрстки на каждом этапе</p>
           </div>
         </div>
       </div>
@@ -2791,30 +2721,8 @@ i,em,cite,address{font-style:normal}
           <span class="badge-pill"><span class="badge-pill-mark">✦</span> переезд друга</span>
         </div>
 
-        <p class="price-tag" style="font-size:24px;">от 3 990 ₽</p>
-        <a class="btn-primary" data-nav="order" id="friendshipDetailOrderBtn">Выбрать формат и заказать</a>
       </div>
 
-      <div class="product-detail-section">
-        <p class="label">Заглянуть внутрь</p>
-        <h2 class="wide-h2" style="margin-left:0;">Примеры разворотов</h2>
-        <p class="product-detail-lead">Несколько страниц из готовых книг о дружбе — листайте стрелками
-          или свайпом.</p>
-
-        <div class="spreads-carousel-wrap">
-          <div class="spreads-carousel" id="friendshipSpreadsCarousel">
-            <div class="spreads-track" id="friendshipSpreadsTrack">
-              <div class="spread-card ph-friendship"><span class="ph-placeholder-text">разворот 1<br>скоро здесь</span></div>
-              <div class="spread-card ph-tale"><span class="ph-placeholder-text">разворот 2<br>скоро здесь</span></div>
-              <div class="spread-card ph-love"><span class="ph-placeholder-text">разворот 3<br>скоро здесь</span></div>
-              <div class="spread-card ph-diary"><span class="ph-placeholder-text">разворот 4<br>скоро здесь</span></div>
-            </div>
-            <button type="button" class="spreads-arrow spreads-arrow-prev" id="friendshipSpreadPrev" aria-label="Предыдущий разворот">‹</button>
-            <button type="button" class="spreads-arrow spreads-arrow-next" id="friendshipSpreadNext" aria-label="Следующий разворот">›</button>
-          </div>
-          <div class="spreads-dots" id="friendshipSpreadsDots"></div>
-        </div>
-      </div>
 
       <div class="product-detail-section">
         <p class="label">Для кого</p>
@@ -2965,7 +2873,7 @@ i,em,cite,address{font-style:normal}
             <p class="price-tag">3 990 ₽</p>
           </div>
           <div class="price-card price-card-featured price-card-featured-glow">
-            <span class="price-card-badge">самый популярный тариф</span>
+            <span class="price-card-badge" aria-label="самый популярный формат"><svg width="11" height="14" viewBox="0 0 11 14" fill="currentColor" aria-hidden="true"><path d="M5.5 0C5.8 2.4 4 3.6 2.8 5.2 1.9 6.4 1.2 7.8 1.2 9.2A4.3 4.3 0 0 0 9.8 9.2c0-1.6-.7-2.9-1.7-4.2-.6.7-1.4 1-2 .6.9-1.7 1-3.8-.6-5.6Z"/></svg></span>
             <p class="label" style="color:#FFFBF6;">16 страниц</p>
             <h3 style="color:#FFFBF6;">Классический формат</h3>
             <p style="color:#FFFBF6;font-size:16px;">6–7 разделов — добавляется рейтинг дружбы и внутренние шутки.
@@ -3045,7 +2953,7 @@ i,em,cite,address{font-style:normal}
           </div>
           <div class="included-item">
             <span class="included-icon">✓</span>
-            <p>Электронная PDF-версия журнала в подарок</p>
+            <p>Согласование текста и вёрстки на каждом этапе</p>
           </div>
         </div>
       </div>
@@ -3078,6 +2986,7 @@ i,em,cite,address{font-style:normal}
       <p class="label" style="color:#6B1F33;">Связь</p>
       <a href="https://instagram.com/svyazany.books" target="_blank" rel="noopener">Instagram · svyazany.books</a>
       <a id="footerTelegram" href="#" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://t.me/svyazanyy_bot" target="_blank" rel="noopener">получить 15 вопросов, чтобы узнать близкого по-настоящему</a>
     </div>
   </div>
 </footer>
