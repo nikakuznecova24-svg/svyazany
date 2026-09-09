@@ -90,18 +90,21 @@ h1.big{font-size:clamp(24px,5vw,36px);line-height:1.06;margin:0 0 .3em}
 /* questions — light editorial */
 .scroll{
   position:relative;
-  background:#FBF7F2;
+  background-color:#FAF6F0;
   background-image:
-    radial-gradient(170px circle at 10% 6%, rgba(255,255,255,0.75), transparent 70%),
-    radial-gradient(210px circle at 90% 16%, rgba(107,31,51,0.06), transparent 72%),
-    radial-gradient(190px circle at 74% 94%, rgba(255,255,255,0.7), transparent 70%),
-    radial-gradient(150px circle at 22% 78%, rgba(107,31,51,0.05), transparent 72%),
-    radial-gradient(140px circle at 52% 44%, rgba(255,255,255,0.5), transparent 72%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.3' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
-  border:1px solid rgba(107,31,51,0.32);
-  border-radius:14px;
-  box-shadow:0 14px 40px rgba(90,26,43,0.14), 0 0 44px rgba(107,31,51,0.10), inset 0 1px 0 rgba(255,255,255,0.7);
-  padding:28px 26px 24px;
+    radial-gradient(220px circle at 12% 8%, rgba(107,31,51,0.11), transparent 62%),
+    radial-gradient(260px circle at 88% 14%, rgba(107,31,51,0.10), transparent 66%),
+    radial-gradient(240px circle at 78% 92%, rgba(107,31,51,0.09), transparent 64%),
+    radial-gradient(200px circle at 18% 82%, rgba(107,31,51,0.08), transparent 62%),
+    radial-gradient(180px circle at 50% 46%, rgba(107,31,51,0.05), transparent 68%),
+    url("assets/paper.png"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='ns'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23ns)' opacity='0.05'/%3E%3C/svg%3E");
+  background-size:auto,auto,auto,auto,auto,420px 420px,140px 140px;
+  background-repeat:no-repeat,no-repeat,no-repeat,no-repeat,no-repeat,repeat,repeat;
+  border:1px solid rgba(107,31,51,0.24);
+  border-radius:16px;
+  box-shadow:0 26px 54px rgba(90,26,43,0.18), 0 0 60px rgba(107,31,51,0.10), 0 4px 12px rgba(90,26,43,0.12), inset 0 1px 0 rgba(255,255,255,0.6);
+  padding:32px 30px 28px;
   margin:26px 0
 }
 @media(max-width:640px){.scroll{padding:20px 18px 16px}
@@ -177,12 +180,10 @@ input:focus,textarea:focus{outline:none;border-color:var(--wine)}
 .spread .body p{overflow-wrap:anywhere}
 .paper{position:relative;margin:26px 0}
 .paper>.scroll,.paper>.spread{margin:0}
-.scroll{border:1px solid rgba(107,31,51,0.42);border-radius:50% 50% 12px 12px / 120px 120px 12px 12px;box-shadow:none}
 #c-spread{border:1px solid rgba(107,31,51,0.34);border-radius:8px;box-shadow:none}
-.scroll{padding-top:62px}
 #c-spread{padding-top:64px}
 #c-spread::before{display:none}
-@media(max-width:640px){.scroll{padding-top:52px}#c-spread{padding-top:52px}.scroll{border-radius:44% 44% 10px 10px / 84px 84px 10px 10px}}
+@media(max-width:640px){#c-spread{padding-top:52px}}
 
 .c-optnote a{color:var(--wine);text-decoration:underline}
 .spread .body p{margin:0 0 5px}
@@ -236,7 +237,7 @@ body{background-image:url("assets/paper.png"),
   radial-gradient(820px circle at 96% 96%, rgba(107,31,51,0.05), transparent 58%);
   background-repeat:repeat,no-repeat,no-repeat,no-repeat,no-repeat;background-size:420px 420px,auto,auto,auto,auto}
 
-.scroll,#c-spread{background-image:
+#c-spread{background-image:
   radial-gradient(70px circle at 82% 16%, rgba(150,108,74,0.09), transparent 70%),
   url("assets/paper.png"),
   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='nn'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23nn)' opacity='0.05'/%3E%3C/svg%3E");
@@ -251,10 +252,6 @@ body{background-image:url("assets/paper.png"),
 
 /* объём карточек — многослойная мягкая тень */
 .paper{position:relative}
-.paper::before,.paper::after{content:"";position:absolute;width:15px;height:15px;opacity:.85;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-12 -12 24 24'%3E%3Cpath d='M0 -11C1.6 -3.4 3.4 -1.6 11 0C3.4 1.6 1.6 3.4 0 11C-1.6 3.4 -3.4 1.6 -11 0C-3.4 -1.6 -1.6 -3.4 0 -11Z' fill='%236B1F33'/%3E%3C/svg%3E") center/contain no-repeat;pointer-events:none}
-.paper::before{left:-7px;bottom:58px}
-.paper::after{right:-7px;bottom:26px}
-.paper--two::before,.paper--two::after{display:none}
 .scroll,#c-spread{filter:drop-shadow(0 26px 46px rgba(90,26,43,0.20)) drop-shadow(0 8px 16px rgba(90,26,43,0.14)) drop-shadow(0 2px 4px rgba(90,26,43,0.10))}
 
 /* буквица в превью конструктора */
