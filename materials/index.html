@@ -252,8 +252,10 @@ body{background-image:url("assets/paper.png"),
 .scroll,#c-spread{filter:drop-shadow(0 26px 46px rgba(90,26,43,0.20)) drop-shadow(0 8px 16px rgba(90,26,43,0.14)) drop-shadow(0 2px 4px rgba(90,26,43,0.10))}
 
 /* буквица в превью конструктора */
-#c-body>p:first-child::first-letter{float:left;font-family:'Fraunces',serif;font-size:3em;line-height:.74;
-  color:var(--wine);padding:.06em .09em 0 0}
+#c-body>p:first-child{margin-top:8px}
+#c-body>p:first-child::first-letter{float:left;font-family:'Fraunces',serif;font-weight:400;
+  font-size:2.55em;line-height:1;color:var(--wine);
+  margin:0.04em 0.14em 0 0}
 
 /* мягкое проявление */
 .reveal{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease}
