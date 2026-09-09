@@ -1377,6 +1377,21 @@ body.overlay-open .sound-toggle{display:none;}
 }
 </style>
 i,em,cite,address{font-style:normal}
+<style>
+.fmtq{max-width:640px;margin:0 auto 46px;text-align:center}
+.fmtq-h{font-family:'Fraunces',serif;color:var(--wine);font-weight:400;font-size:clamp(22px,4vw,30px);margin:0 0 6px}
+.fmtq-sub{font-family:'Cormorant Garamond',serif;color:var(--ink-soft);font-size:18px;margin:0 0 22px}
+.fmtq-q{font-family:'Fraunces',serif;color:var(--wine);font-size:20px;margin:0 0 16px}
+.fmtq-opts{display:flex;flex-direction:column;gap:10px;align-items:center}
+.fmtq-opt{font-family:'EB Garamond',serif;font-size:16px;color:var(--wine);background:var(--cream);
+  border:1px solid var(--wine);border-radius:26px;padding:11px 22px;cursor:pointer;max-width:520px;width:100%;
+  transition:background .2s,color .2s}
+.fmtq-opt:hover{background:var(--wine);color:var(--cream)}
+.fmtq-res{font-family:'Fraunces',serif;color:var(--wine);font-size:clamp(20px,3.6vw,26px);margin:0 0 8px}
+.fmtq-desc{font-family:'EB Garamond',serif;color:var(--ink);font-size:17px;margin:0 0 18px;line-height:1.5}
+.fmtq-again{background:none;border:none;color:var(--ink-soft);font-family:'Cormorant Garamond',serif;font-size:16px;cursor:pointer;text-decoration:underline;margin-top:14px}
+.fmtq-prog{font-family:'Cormorant Garamond',serif;color:var(--ink-soft);font-size:15px;margin-bottom:10px}
+</style>
 </head>
 <body>
 
@@ -1815,6 +1830,13 @@ i,em,cite,address{font-style:normal}
       <h1>Расскажите о вашей <span class="script" style="font-size:1.25em;">истории</span></h1>
       <p class="hero-sub" style="max-width:600px;">Заполните форму — я свяжусь с вами в Telegram, чтобы обсудить
         детали и формат.</p>
+    </div>
+
+    
+    <div class="wrap fmtq" id="fmtq">
+      <h2 class="fmtq-h">не знаете, какой формат выбрать?</h2>
+      <p class="fmtq-sub">три вопроса — и подскажем подходящую книгу.</p>
+      <div class="fmtq-body" id="fmtqBody"></div>
     </div>
 
     <div class="wrap order-wrap">
@@ -3585,6 +3607,61 @@ document.addEventListener('keydown', (e) => {
     var once=function(){a.play().then(function(){set(true);}).catch(function(){});document.removeEventListener('pointerdown',once);};
     document.addEventListener('pointerdown',once,{once:true});
   }}catch(e){}
+})();
+</script>
+<script>
+(function(){
+  var body=document.getElementById('fmtqBody'); if(!body) return;
+  var Q=[
+    ["кому подарок?",[
+      ["партнёру","lyubov"],
+      ["родителю, брату, сестре, взрослому другу","dusha"],
+      ["компании друзей или другу с общей историей","druzhba"],
+      ["ребёнку","skazka"],
+      ["себе","dusha"]]],
+    ["какой повод?",[
+      ["юбилей, важный этап, «просто хочу, чтобы знал»","dusha"],
+      ["годовщина, свадьба, день рождения партнёра","lyubov"],
+      ["трудный период, вернуть веру в себя","skazka"],
+      ["годовщина дружбы, проводы, сохранить общее","druzhba"]]],
+    ["что хочешь, чтобы человек почувствовал?",[
+      ["«мой путь важен, меня видят»","dusha"],
+      ["«нашу любовь видят, она настоящая»","lyubov"],
+      ["«я справлюсь, я герой своей истории»","skazka"],
+      ["«наша дружба — ценность»","druzhba"]]]
+  ];
+  var INFO={
+    dusha:["книга души","биография близкого: его путь, характер и слова тех, кто его любит."],
+    lyubov:["книга про любовь","про вас двоих: два голоса, ваши признания и общая история."],
+    skazka:["книга-сказка","история человека языком доброй сказки, чтобы поверить в себя."],
+    druzhba:["книга нашей дружбы","общая история компании или двоих друзей."]
+  };
+  var PRIO=["dusha","lyubov","skazka","druzhba"];
+  var score={dusha:0,lyubov:0,skazka:0,druzhba:0}, step=0;
+  function render(){
+    if(step<Q.length){
+      var q=Q[step];
+      body.innerHTML='<p class="fmtq-prog">'+(step+1)+' из 3</p><p class="fmtq-q">'+q[0]+'</p><div class="fmtq-opts"></div>';
+      var box=body.querySelector('.fmtq-opts');
+      q[1].forEach(function(o){
+        var b=document.createElement('button'); b.className='fmtq-opt'; b.type='button'; b.textContent=o[0];
+        b.addEventListener('click',function(){ score[o[1]]++; step++; render(); });
+        box.appendChild(b);
+      });
+    } else {
+      var best=Math.max(score.dusha,score.lyubov,score.skazka,score.druzhba);
+      var win=PRIO.filter(function(f){return score[f]===best;})[0];
+      var i=INFO[win];
+      body.innerHTML='<p class="fmtq-res">тебе подойдёт «'+i[0]+'»</p>'+
+        '<p class="fmtq-desc">'+i[1]+'</p>'+
+        '<a class="btn-primary" href="#view-portfolio" data-nav="portfolio">посмотреть форматы</a>'+
+        '<br><button type="button" class="fmtq-again">пройти заново</button>';
+      body.querySelector('.fmtq-again').addEventListener('click',function(){
+        score={dusha:0,lyubov:0,skazka:0,druzhba:0}; step=0; render();
+      });
+    }
+  }
+  render();
 })();
 </script>
 </body>
