@@ -378,6 +378,8 @@ main{padding-top:72px;}
 }
 .wax-seal-wrap{display:flex;justify-content:center;margin-bottom:20px;}
 .wax-seal-svg{filter:drop-shadow(0 6px 14px rgba(58,20,32,0.25));}
+.brand-seal{display:inline-flex;align-items:center;justify-content:center;width:96px;height:96px;border-radius:50%;background:#FFFBF6;border:1px solid #6B1F33;box-shadow:0 6px 14px rgba(58,20,32,.2);}
+.brand-seal img{width:66px;height:auto;display:block;}
 
 /* ===== PAGE HEAD (shared) ===== */
 .page-head{padding:60px 28px 40px;box-sizing:border-box;}
@@ -1854,18 +1856,19 @@ i,em,cite,address{font-style:normal}
 
         <div id="orderConfirm" class="order-confirm">
           <div class="wax-seal-wrap" style="margin-bottom:18px;">
-            <svg viewBox="0 0 120 120" width="90" height="90" class="wax-seal-svg" aria-label="Восковая печать Связаны">
-            <circle cx="60" cy="60" r="56" fill="#6B1F33"/>
-            <circle cx="60" cy="60" r="56" fill="none" stroke="#6B1F33" stroke-width="2" opacity="0.4"/>
-            <circle cx="60" cy="60" r="44" fill="none" stroke="#FFFBF6" stroke-width="1" opacity="0.5"/>
-            <text x="60" y="68" text-anchor="middle" font-family="'Mrs Saint Delafield', cursive" font-size="30" fill="#FFFBF6">связаны</text>
-          </svg>
+            <span class="brand-seal"><img src="assets/logo.png" alt="связаны"></span>
           </div>
-          <h3>Заявка получена</h3>
-          <p id="confirmSummary" style="margin:16px 0 24px;"></p>
-          <p style="color:var(--ink-soft);font-size:16px;">Форма пока работает без автоматической отправки — скопируйте
-            сообщение ниже и пришлите его в Telegram, чтобы я точно его увидела.</p>
-          <a id="telegramLink" class="btn-primary" href="#" target="_blank" rel="noopener">Написать в Telegram</a>
+          <h3>заявка отправлена</h3>
+          <p id="confirmSummary" style="margin:16px 0 20px;"></p>
+          <p style="color:var(--ink-soft);font-size:16px;">мы получили вашу заявку и свяжемся с вами в течение дня.</p>
+        </div>
+        <div id="orderError" class="order-confirm">
+          <div class="wax-seal-wrap" style="margin-bottom:18px;">
+            <span class="brand-seal"><img src="assets/logo.png" alt="связаны"></span>
+          </div>
+          <h3>не получилось отправить</h3>
+          <p style="margin:16px 0 20px;color:var(--ink-soft);font-size:16px;">кажется, что-то со связью. напишите нам напрямую — мы всё примем.</p>
+          <a class="btn-primary" href="https://t.me/nikakuznecovaa" target="_blank" rel="noopener">написать в telegram</a>
         </div>
       </div>
     </div>
@@ -3217,21 +3220,32 @@ const orderConfirm = document.getElementById('orderConfirm');
 const confirmSummary = document.getElementById('confirmSummary');
 const telegramLink = document.getElementById('telegramLink');
 
-orderForm.addEventListener('submit', (e) => {
+orderForm.addEventListener('submit', async (e) => {
   e.preventDefault();
+  const FORM_ENDPOINT = "https://svyazany-form.nikakuznecova24.workers.dev";
+  const esc = (s) => (s || '').replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
   const data = Object.fromEntries(new FormData(orderForm).entries());
-  confirmSummary.innerHTML = `
-    <strong>${data.name}</strong><br>
-    Контакт: ${data.contact}<br>
-    Формат: ${data.format}<br>
-    ${data.message ? '«' + data.message + '»' : ''}
-  `;
-  const tgText = encodeURIComponent(
-    `Здравствуйте! Хочу заказать журнал.\nИмя: ${data.name}\nКонтакт: ${data.contact}\nФормат: ${data.format}\n${data.message ? 'Детали: ' + data.message : ''}`
-  );
-  telegramLink.href = `https://t.me/${TELEGRAM_HANDLE}?text=${tgText}`;
-  orderForm.style.display = 'none';
-  orderConfirm.classList.add('active');
+  const orderError = document.getElementById('orderError');
+  const btn = orderForm.querySelector('button[type="submit"]');
+  const bt = btn.textContent; btn.disabled = true; btn.textContent = 'отправляем…';
+  try {
+    const r = await fetch(FORM_ENDPOINT, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    const j = await r.json().catch(() => ({ ok: false }));
+    if (!j.ok) throw new Error('send failed');
+    confirmSummary.innerHTML =
+      '<strong>' + esc(data.name) + '</strong><br>контакт: ' + esc(data.contact) +
+      '<br>формат: ' + esc(data.format);
+    orderForm.style.display = 'none';
+    orderConfirm.classList.add('active');
+  } catch (err) {
+    orderForm.style.display = 'none';
+    if (orderError) orderError.classList.add('active');
+  } finally {
+    btn.disabled = false; btn.textContent = bt;
+  }
 });
 
 // ---- Ambient sound toggle ----
