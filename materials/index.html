@@ -184,7 +184,6 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
   .grp,ol.guide li{break-inside:avoid}
 }
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -238,7 +237,7 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
     </div>
 
     <div class="btnrow">
-      <button class="btn" id="saveImg" type="button">сохранить список картинкой</button>
+      <a class="btn" id="saveImg" href="assets/guide-list.png" download="связаны-15-вопросов.png">сохранить список картинкой</a>
     </div>
   </section>
 
@@ -334,48 +333,6 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
   [who,occ,f1,f2,f3].forEach(function(el){el.addEventListener('input',render);});
   render();
 
-  // сохранить список вопросов картинкой (с логотипом сверху)
-  var saveBtn=document.getElementById('saveImg');
-  if(saveBtn && window.html2canvas){
-    saveBtn.addEventListener('click',function(){
-      var card=document.querySelector('.scroll');
-      if(!card) return;
-      var old=saveBtn.textContent; saveBtn.textContent='готовлю…'; saveBtn.disabled=true;
-      var done=function(){ saveBtn.textContent=old; saveBtn.disabled=false; };
-
-      var box=document.createElement('div');
-      box.style.cssText='position:fixed;left:-99999px;top:0;width:'+card.offsetWidth+'px;background:#FFFBF6;padding:30px 0 8px';
-      var logo=document.createElement('img');
-      logo.src='assets/logo.png';
-      logo.style.cssText='display:block;width:200px;margin:0 auto 22px';
-      var clone=card.cloneNode(true);
-      clone.style.margin='0';
-      box.appendChild(logo); box.appendChild(clone);
-      document.body.appendChild(box);
-
-      (logo.decode ? logo.decode().catch(function(){}) : Promise.resolve())
-        .then(function(){ return (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve(); })
-        .then(function(){
-          return html2canvas(box,{
-            scale:2, backgroundColor:'#FFFBF6', useCORS:true, allowTaint:true, logging:false,
-            onclone:function(doc){
-              var el=doc.querySelector('.scroll');
-              if(el){ el.style.backgroundImage='none'; el.style.background='#FAF6F1'; el.style.boxShadow='none'; }
-            }
-          });
-        })
-        .then(function(canvas){
-          canvas.toBlob(function(blob){
-            var url=URL.createObjectURL(blob), a=document.createElement('a');
-            a.href=url; a.download='связаны-15-вопросов.png';
-            document.body.appendChild(a); a.click(); a.remove();
-            setTimeout(function(){URL.revokeObjectURL(url);},1000);
-            box.remove(); done();
-          },'image/png');
-        })
-        .catch(function(){ box.remove(); saveBtn.textContent='не получилось — сделайте скриншот'; setTimeout(done,2500); });
-    });
-  }
 
   // музыка: мягкий тумблер, не падаем если файла нет
   var mel=document.getElementById('mel'),mbtn=document.getElementById('mbtn'),on=false;
