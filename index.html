@@ -260,7 +260,7 @@ main{padding-top:72px;}
 /* ===== HERO ===== */
 .hero{padding:70px 0 40px;}
 .hero-inner{display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:center;}
-.hero-text h1{font-size:clamp(34px,4.4vw,52px);margin:14px 0 22px;}
+.hero-text h1{font-size:clamp(34px,4.4vw,52px);margin:14px 0 22px;line-height:1.12;}
 .hero-sub{font-size:20px;color:var(--ink-soft);max-width:460px;margin-bottom:32px;}
 .hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
 
@@ -996,6 +996,9 @@ body.overlay-open .sound-toggle{display:none;}
   padding:56px 28px 100px;
   position:relative;
 }
+.product-overlay-back{position:absolute;top:16px;left:16px;z-index:30;display:inline-flex;align-items:center;gap:7px;background:none;border:none;cursor:pointer;font-family:'EB Garamond',serif;font-size:15px;color:var(--wine);padding:6px 6px;}
+.product-overlay-back span{font-size:18px;line-height:1;}
+.product-overlay-back:hover{opacity:.65;}
 .product-overlay-close{
   position:fixed;
   top:16px;
@@ -1426,7 +1429,7 @@ i,em,cite,address{font-style:normal}
       <div class="wrap hero-inner">
         <div class="hero-text">
           <p class="label hero-label-script">персональные журналы и книги</p>
-          <h1>Подарок близкому человеку,<br>который <span class="script" style="font-size:1.25em;">трогает</span>,
+          <h1>Подарок близкому человеку,<br>который <span class="script" style="font-size:1.08em;line-height:0.8;">трогает</span>,
             а не просто удивляет.</h1>
           <div class="hero-actions">
             <a class="btn-primary" data-nav="portfolio">Выбрать формат</a>
@@ -1898,12 +1901,8 @@ i,em,cite,address{font-style:normal}
 
   <!-- ============ PRODUCT DETAIL: КНИГА ДУШИ ============ -->
   <div id="soulDetailOverlay" class="product-overlay" role="dialog" aria-modal="true" aria-labelledby="soulDetailTitle">
-    <div class="sticky-order-bar">
-      <div class="sticky-order-bar-price">от 5 490 ₽<span>книга души</span></div>
-      <a class="btn-primary" data-nav="order" id="soulStickyOrderBtn">Заказать</a>
-    </div>
     <div class="product-overlay-inner">
-      <button type="button" id="closeSoulDetail" class="product-overlay-close" aria-label="Закрыть">✕</button>
+      <button type="button" id="closeSoulDetail" data-nav="home" class="product-overlay-back" aria-label="На главную"><span aria-hidden="true">←</span> назад</button>
       <button type="button" id="soulScrollTop" class="scroll-top-btn" aria-label="Наверх страницы">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
@@ -1919,6 +1918,7 @@ i,em,cite,address{font-style:normal}
           <span class="badge-pill"><span class="badge-pill-mark">✦</span> новый этап жизни</span>
           <span class="badge-pill"><span class="badge-pill-mark">✦</span> подарок себе</span>
         </div>
+        <a class="btn-ghost" data-nav="order" style="margin-top:24px;display:inline-flex;">выбрать формат</a>
 
       </div>
 
@@ -2154,12 +2154,8 @@ i,em,cite,address{font-style:normal}
 
   <!-- ============ PRODUCT DETAIL: ТЕРАПЕВТИЧЕСКАЯ КНИГА-СКАЗКА ============ -->
   <div id="taleDetailOverlay" class="product-overlay" role="dialog" aria-modal="true" aria-labelledby="taleDetailTitle">
-    <div class="sticky-order-bar">
-      <div class="sticky-order-bar-price">от 2 990 ₽<span>книга-сказка</span></div>
-      <a class="btn-primary" data-nav="order" id="taleStickyOrderBtn">Заказать</a>
-    </div>
     <div class="product-overlay-inner">
-      <button type="button" id="closeTaleDetail" class="product-overlay-close" aria-label="Закрыть">✕</button>
+      <button type="button" id="closeTaleDetail" data-nav="home" class="product-overlay-back" aria-label="На главную"><span aria-hidden="true">←</span> назад</button>
       <button type="button" id="taleScrollTop" class="scroll-top-btn" aria-label="Наверх страницы">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
@@ -2178,6 +2174,7 @@ i,em,cite,address{font-style:normal}
           <span class="badge-pill"><span class="badge-pill-mark">✦</span> важное событие</span>
           <span class="badge-pill"><span class="badge-pill-mark">✦</span> новый этап жизни</span>
         </div>
+        <a class="btn-ghost" data-nav="order" style="margin-top:24px;display:inline-flex;">выбрать формат</a>
 
       </div>
 
@@ -2393,12 +2390,8 @@ i,em,cite,address{font-style:normal}
 
   <!-- ============ PRODUCT DETAIL: КНИГА ПРО ЛЮБОВЬ ============ -->
   <div id="loveDetailOverlay" class="product-overlay" role="dialog" aria-modal="true" aria-labelledby="loveDetailTitle">
-    <div class="sticky-order-bar">
-      <div class="sticky-order-bar-price">от 5 490 ₽<span>книга про любовь</span></div>
-      <a class="btn-primary" data-nav="order" id="loveStickyOrderBtn">Заказать</a>
-    </div>
     <div class="product-overlay-inner">
-      <button type="button" id="closeLoveDetail" class="product-overlay-close" aria-label="Закрыть">✕</button>
+      <button type="button" id="closeLoveDetail" data-nav="home" class="product-overlay-back" aria-label="На главную"><span aria-hidden="true">←</span> назад</button>
       <button type="button" id="loveScrollTop" class="scroll-top-btn" aria-label="Наверх страницы">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
@@ -2414,6 +2407,7 @@ i,em,cite,address{font-style:normal}
           <span class="badge-pill"><span class="badge-pill-mark">✦</span> свадьба</span>
           <span class="badge-pill"><span class="badge-pill-mark">✦</span> день рождения партнёра</span>
         </div>
+        <a class="btn-ghost" data-nav="order" style="margin-top:24px;display:inline-flex;">выбрать формат</a>
 
       </div>
 
@@ -2679,12 +2673,8 @@ i,em,cite,address{font-style:normal}
 
   <!-- ============ PRODUCT DETAIL: КНИГА НАШЕЙ ДРУЖБЫ ============ -->
   <div id="friendshipDetailOverlay" class="product-overlay" role="dialog" aria-modal="true" aria-labelledby="friendshipDetailTitle">
-    <div class="sticky-order-bar">
-      <div class="sticky-order-bar-price">от 3 990 ₽<span>книга нашей дружбы</span></div>
-      <a class="btn-primary" data-nav="order" id="friendshipStickyOrderBtn">Заказать</a>
-    </div>
     <div class="product-overlay-inner">
-      <button type="button" id="closeFriendshipDetail" class="product-overlay-close" aria-label="Закрыть">✕</button>
+      <button type="button" id="closeFriendshipDetail" data-nav="home" class="product-overlay-back" aria-label="На главную"><span aria-hidden="true">←</span> назад</button>
       <button type="button" id="friendshipScrollTop" class="scroll-top-btn" aria-label="Наверх страницы">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
@@ -2700,6 +2690,7 @@ i,em,cite,address{font-style:normal}
           <span class="badge-pill"><span class="badge-pill-mark">✦</span> годовщина дружбы</span>
           <span class="badge-pill"><span class="badge-pill-mark">✦</span> переезд друга</span>
         </div>
+        <a class="btn-ghost" data-nav="order" style="margin-top:24px;display:inline-flex;">выбрать формат</a>
 
       </div>
 
@@ -3480,9 +3471,6 @@ document.addEventListener('keydown', (e) => {
 #svz-music.playing{background:#6B1F33;color:#FFFBF6;box-shadow:0 0 0 6px rgba(107,31,51,0.10)}
 #svz-music:hover{box-shadow:0 4px 18px rgba(107,31,51,0.28)}
 @media(max-width:640px){#svz-music{width:42px;height:42px;right:14px;bottom:16px;font-size:18px}}
-/* на страницах продуктов поднять над нижней панелью заказа */
-body.overlay-open #svz-music{bottom:90px}
-@media(max-width:640px){body.overlay-open #svz-music{bottom:84px}}
 </style>
 <script>
 (function(){
