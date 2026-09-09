@@ -3162,11 +3162,11 @@ function initSpreadsCarousel(ids){
   if(!track) return;
   const cards = Array.from(track.children);
   const total = cards.length;
-  if(total < 2){ if(prevBtn) prevBtn.style.display='none'; if(nextBtn) nextBtn.style.display='none'; if(dotsWrap) dotsWrap.style.display='none'; }
   const prevBtn = document.getElementById(ids.prev);
   const nextBtn = document.getElementById(ids.next);
   const dotsWrap = document.getElementById(ids.dots);
   const carousel = document.getElementById(ids.carousel);
+  if(total < 2){ if(prevBtn) prevBtn.style.display='none'; if(nextBtn) nextBtn.style.display='none'; if(dotsWrap) dotsWrap.style.display='none'; }
   const label = ids.label || 'Разворот';
   let index = 0;
 
