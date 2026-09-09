@@ -3528,5 +3528,42 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && videoModalOverlay) videoModalOverlay.classList.remove('open');
 });
 </script>
+<!-- фоновое музыкальное сопровождение «Связаны» -->
+<audio id="svz-mel" loop preload="none" src="assets/svyazany-melody.mp3"></audio>
+<button id="svz-music" type="button" aria-label="музыкальное сопровождение" title="музыка">
+  <span class="svz-note">&#9834;</span>
+</button>
+<style>
+#svz-music{
+  position:fixed;right:18px;bottom:20px;z-index:9999;
+  width:46px;height:46px;border-radius:50%;
+  background:#FFFBF6;border:1px solid #6B1F33;
+  color:#6B1F33;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 2px 14px rgba(107,31,51,0.18);
+  transition:background .2s,color .2s,box-shadow .2s;
+  font-size:20px;line-height:1;padding:0;
+}
+#svz-music .svz-note{transform:translateY(-1px)}
+#svz-music.playing{background:#6B1F33;color:#FFFBF6;box-shadow:0 0 0 6px rgba(107,31,51,0.10)}
+#svz-music:hover{box-shadow:0 4px 18px rgba(107,31,51,0.28)}
+@media(max-width:640px){#svz-music{width:42px;height:42px;right:14px;bottom:16px;font-size:18px}}
+</style>
+<script>
+(function(){
+  var a=document.getElementById('svz-mel'),b=document.getElementById('svz-music'),on=false;
+  function set(v){on=v;b.classList.toggle('playing',v);try{localStorage.setItem('svzMusic',v?'1':'0');}catch(e){}}
+  b.addEventListener('click',function(){
+    if(!on){var p=a.play();if(p&&p.then){p.then(function(){set(true);}).catch(function(){});}else{set(true);}}
+    else{a.pause();set(false);}
+  });
+  // запомнить выбор; звук всё равно требует клика при первом заходе
+  try{if(localStorage.getItem('svzMusic')==='1'){
+    var once=function(){a.play().then(function(){set(true);}).catch(function(){});document.removeEventListener('pointerdown',once);};
+    document.addEventListener('pointerdown',once,{once:true});
+  }}catch(e){}
+})();
+</script>
 </body>
+
 </html>
