@@ -2963,7 +2963,7 @@ i,em,cite,address{font-style:normal}
     <div class="footer-links">
       <p class="label" style="color:#6B1F33;">Связь</p>
       <a href="https://instagram.com/svyazany.books" target="_blank" rel="noopener">Instagram · svyazany.books</a>
-      <a id="footerTelegram" href="#" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://t.me/nikakuznecovaa" target="_blank" rel="noopener">написать автору</a>
       <a href="https://t.me/svyazanyy_bot" target="_blank" rel="noopener">получить 15 вопросов, чтобы узнать близкого по-настоящему</a>
     </div>
   </div>
@@ -2987,7 +2987,7 @@ i,em,cite,address{font-style:normal}
 <script>
 // ---- Telegram placeholder handle (replace with real one) ----
 const TELEGRAM_HANDLE = "svyazany"; // TODO: заменить на настоящий телеграм-юзернейм
-document.getElementById('footerTelegram').href = `https://t.me/${TELEGRAM_HANDLE}`;
+var _ft=document.getElementById('footerTelegram'); if(_ft) _ft.href = `https://t.me/${TELEGRAM_HANDLE}`;
 
 // ---- Navigation (single-page smooth scroll) ----
 const views = document.querySelectorAll('.view');
