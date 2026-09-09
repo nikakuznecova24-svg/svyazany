@@ -171,18 +171,19 @@ input:focus,textarea:focus{outline:none;border-color:var(--wine)}
 
 /* spread preview */
 .spread{
-  background:var(--cream-deep);
-  background-image:radial-gradient(520px circle at 20% 0%, rgba(107,31,51,0.06), transparent 60%);
-  border:1px solid rgba(107,31,51,0.4);
-  padding:40px 34px;margin-top:22px;position:relative
+  background-color:#FAF6F0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  border:1px solid rgba(107,31,51,0.32);
+  padding:72px 34px 40px;margin-top:22px;position:relative;
+  box-shadow:0 12px 34px rgba(90,26,43,0.10)
 }
 .spread::before{content:"";position:absolute;inset:7px;border:1px solid rgba(107,31,51,0.25);pointer-events:none}
-.spread .issue{font-family:'Cormorant Garamond',serif;font-size:13px;color:var(--rose);text-align:center}
+.spread .c-occ{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--ink-soft);text-align:center;margin:2px 0 16px}
 .spread .who{font-family:'Fraunces',serif;font-size:clamp(30px,7vw,44px);color:var(--wine);text-align:center;margin:6px 0 4px;line-height:1.05}
 .spread .rubric{font-family:'Cormorant Garamond',serif;color:var(--ink-soft);text-align:center;margin-bottom:18px}
 .spread .body{font-family:'EB Garamond',serif;font-size:18px;line-height:1.7;color:var(--ink)}
 .spread .body b{color:var(--wine-deep)}
-.spread .sign{display:block;width:120px;margin:18px 0 0 auto}
+.spread .sign{position:absolute;top:24px;left:26px;width:74px;margin:0;display:block}
 
 .music{display:flex;align-items:center;gap:12px;justify-content:center;margin:8px 0 0;font-family:'Cormorant Garamond',serif;color:var(--ink-soft)}
 .music button{
@@ -310,7 +311,6 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
     </div>
 
     <div class="spread" id="c-spread">
-      <div class="issue" id="c-issue">связаны · выпуск о человеке</div>
       <div class="who" id="c-who">имя в деталях</div>
       <div class="body" id="c-body">
         <p class="c-hint">здесь вживую соберётся эскиз страницы — начни заполнять поля выше.</p>
@@ -348,7 +348,7 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
   var $=function(id){return document.getElementById(id);};
   var nameEl=$('c-name'),occEl=$('c-occ'),lifeEl=$('c-life'),pathEl=$('c-path'),strEl=$('c-str'),
       ivEl=$('c-a1'),
-      issueEl=$('c-issue'),whoEl=$('c-who'),bodyEl=$('c-body');
+      whoEl=$('c-who'),bodyEl=$('c-body');
   if(!nameEl||!bodyEl) return;
 
   function esc(s){return (s||'').replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
@@ -367,15 +367,15 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
     var strs=(strEl.value||'').split(',').map(function(x){return lc(trimPunct(x));}).filter(Boolean).slice(0,7);
     var iva=trimPunct(ivEl&&ivEl.value);
 
-    issueEl.textContent='связаны · выпуск о человеке'+(occ?' · '+lc(occ):'');
     whoEl.textContent=(name||'имя')+' в деталях';
 
-    if(!name && !life && !path && !strs.length && !iva){
+    if(!name && !life && !path && !strs.length && !iva && !occ){
       bodyEl.innerHTML='<p class="c-hint">здесь вживую соберётся эскиз страницы — начни заполнять поля выше.</p>';
       return;
     }
 
     var h='';
+    if(occ) h+='<p class="c-occ">'+esc(lc(occ))+'</p>';
 
     // вступление — безопасно при любом вводе
     h+='<p><b>'+nm+'</b> — этот выпуск о том, кто '+G('он','она')+' на самом деле: что за '+G('ним','ней')+' стоит и почему '+G('его','её')+' хочется знать не в двух словах.';
