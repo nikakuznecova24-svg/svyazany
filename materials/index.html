@@ -149,6 +149,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--wine)}
 .c-note{background:var(--wine);color:var(--cream);font-family:'EB Garamond',serif;font-size:16px;line-height:1.55;padding:16px 20px;margin:6px 0 24px;border-radius:2px}
 .c-note-sub{display:block;margin-top:7px;font-family:'Cormorant Garamond',serif;font-size:15px;color:rgba(255,251,246,0.78)}
 .req{color:var(--wine)}
+.c-optnote{font-family:'Cormorant Garamond',serif;color:var(--ink-soft);font-size:17px;margin:24px 0 2px}
 
 .label-row{display:block;font-family:'Cormorant Garamond',serif;color:var(--ink-soft);margin-bottom:5px;font-size:18px}
 .c-gender{display:flex;gap:22px}
@@ -303,34 +304,18 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
       <input id="c-str" type="text" maxlength="180" placeholder="например: надёжный, спокойный, руки золотые">
     </div>
 
-    <label class="c-check"><input type="checkbox" id="c-iv-on"> добавить интервью — по желанию</label>
-    <div id="c-iv" hidden>
-      <div class="field">
-        <label for="c-q1">вопрос</label>
-        <select id="c-q1">
-          <option value="">— выбери вопрос —</option>
-          <option>момент, который хочется прожить ещё раз</option>
-          <option>что делает счастливее всего</option>
-          <option>за что благодарность себе</option>
-          <option>о чём мечты</option>
-          <option>совет себе десятилетней давности</option>
-          <option>что дороже всего в людях</option>
-        </select>
-        <input id="c-a1" type="text" maxlength="220" placeholder="ответ">
-      </div>
-      <div class="field">
-        <label for="c-q2">ещё вопрос</label>
-        <select id="c-q2">
-          <option value="">— выбери вопрос —</option>
-          <option>момент, который хочется прожить ещё раз</option>
-          <option>что делает счастливее всего</option>
-          <option>за что благодарность себе</option>
-          <option>о чём мечты</option>
-          <option>совет себе десятилетней давности</option>
-          <option>что дороже всего в людях</option>
-        </select>
-        <input id="c-a2" type="text" maxlength="220" placeholder="ответ">
-      </div>
+    <p class="c-optnote">интервью — по желанию</p>
+    <div class="field">
+      <label for="c-a1">какой момент хочется прожить ещё раз</label>
+      <input id="c-a1" type="text" maxlength="220" placeholder="ответ от лица человека">
+    </div>
+    <div class="field">
+      <label for="c-a2">что в людях ценит больше всего</label>
+      <input id="c-a2" type="text" maxlength="220" placeholder="ответ от лица человека">
+    </div>
+    <div class="field">
+      <label for="c-a3">совет себе десять лет назад</label>
+      <input id="c-a3" type="text" maxlength="220" placeholder="ответ от лица человека">
     </div>
 
     <div class="spread" id="c-spread">
@@ -371,7 +356,7 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
 (function(){
   var $=function(id){return document.getElementById(id);};
   var nameEl=$('c-name'),occEl=$('c-occ'),lifeEl=$('c-life'),pathEl=$('c-path'),strEl=$('c-str'),
-      ivOn=$('c-iv-on'),ivBox=$('c-iv'),q1=$('c-q1'),a1=$('c-a1'),q2=$('c-q2'),a2=$('c-a2'),
+      a1=$('c-a1'),a2=$('c-a2'),a3=$('c-a3'),
       issueEl=$('c-issue'),whoEl=$('c-who'),bodyEl=$('c-body');
   if(!nameEl||!bodyEl) return;
 
@@ -383,16 +368,7 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
   function gv(){var r=document.querySelector('input[name="c-g"]:checked');return r?r.value:'m';}
   function G(m,f){return gv()==='f'?f:m;}
 
-  if(ivOn){ivOn.addEventListener('change',function(){if(ivBox)ivBox.hidden=!ivOn.checked;render();});}
-
-  function syncQ(){
-    if(!q1||!q2) return;
-    Array.prototype.forEach.call(q2.options,function(o){o.disabled=o.value!==''&&o.text===q1.value;});
-    Array.prototype.forEach.call(q1.options,function(o){o.disabled=o.value!==''&&o.text===q2.value;});
-  }
-
   function render(){
-    syncQ();
     var name=lc(nameEl.value);
     var nm=esc(name||'имя');
     var occ=noDot(occEl.value);
@@ -433,12 +409,11 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
     }
 
     // intervyu
-    if(ivOn&&ivOn.checked){
-      var pairs=[[q1,a1],[q2,a2]].map(function(p){return [tr(p[0]&&p[0].value), tr(p[1]&&p[1].value)];}).filter(function(p){return p[0]&&p[1];});
-      if(pairs.length){
-        h+='<p class="c-sub">интервью</p>';
-        pairs.forEach(function(p){h+='<p class="c-q">— '+esc(lc(p[0]))+'</p><p>'+esc(p[1])+'</p>';});
-      }
+    var IVQ=['какой момент хочется прожить ещё раз','что в людях ценит больше всего','совет себе десять лет назад'];
+    var ivp=[a1,a2,a3].map(function(el,i){return [IVQ[i], tr(el&&el.value)];}).filter(function(p){return p[1];});
+    if(ivp.length){
+      h+='<p class="c-sub">интервью</p>';
+      ivp.forEach(function(p){h+='<p class="c-q">— '+esc(p[0])+'</p><p>'+esc(p[1])+'</p>';});
     }
 
     // neskolko slov
@@ -447,8 +422,7 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
     bodyEl.innerHTML=h;
   }
 
-  [nameEl,occEl,lifeEl,pathEl,strEl,a1,a2].forEach(function(el){if(el)el.addEventListener('input',render);});
-  [q1,q2].forEach(function(el){if(el)el.addEventListener('change',render);});
+  [nameEl,occEl,lifeEl,pathEl,strEl,a1,a2,a3].forEach(function(el){if(el)el.addEventListener('input',render);});
   Array.prototype.forEach.call(document.querySelectorAll('input[name="c-g"]'),function(el){el.addEventListener('change',render);});
   render();
 })();
