@@ -467,6 +467,17 @@ body{background-image:url("assets/paper.png"),
   ];
   function situation(txt){for(var i=0;i<SITUATIONS.length;i++){if(SITUATIONS[i][0].test(txt))return SITUATIONS[i][1];}return '';}
 
+
+  function applyGender(){
+    var f=gv()==='f';
+    function L(id,t){var el=document.querySelector('label[for="'+id+'"]');if(el)el.textContent=t;}
+    L('c-life', f?'чем она живёт сейчас — работа, увлечения, обычный день':'чем он живёт сейчас — работа, увлечения, обычный день');
+    L('c-path', f?'что она прошла в прошлом — что сделало её сильнее':'что он прошёл в прошлом — что сделало его сильнее');
+    L('c-a1',  f?'какой момент с ней хочется прожить ещё раз':'какой момент с ним хочется прожить ещё раз');
+    var p=$('c-path'); if(p) p.placeholder=f?'например: одна подняла троих детей, пережила тяжёлые девяностые':'например: один поднял троих детей, пережил тяжёлые девяностые';
+    var s=$('c-str'); if(s) s.placeholder=f?'например: надёжная, спокойная, золотые руки':'например: надёжный, спокойный, руки золотые';
+  }
+
   function capFirst(s){s=tr(s);return s?s.charAt(0).toUpperCase()+s.slice(1):s;}
 
   function render(){
@@ -550,7 +561,8 @@ body{background-image:url("assets/paper.png"),
   }
 
   [nameEl,lifeEl,pathEl,strEl,ivEl].forEach(function(el){if(el)el.addEventListener('input',render);});
-  Array.prototype.forEach.call(document.querySelectorAll('input[name="c-g"]'),function(el){el.addEventListener('change',render);});
+  Array.prototype.forEach.call(document.querySelectorAll('input[name="c-g"]'),function(el){el.addEventListener('change',function(){applyGender();render();});});
+  applyGender();
 
   var gen=$('c-gen'),res=$('c-result');
   if(gen&&res) gen.addEventListener('click',function(){
