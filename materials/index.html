@@ -184,6 +184,7 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
   .grp,ol.guide li{break-inside:avoid}
 }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -332,6 +333,29 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
   }
   [who,occ,f1,f2,f3].forEach(function(el){el.addEventListener('input',render);});
   render();
+
+  // сохранить список вопросов картинкой
+  var saveBtn=document.getElementById('saveImg');
+  if(saveBtn && window.html2canvas){
+    saveBtn.addEventListener('click',function(){
+      var card=document.querySelector('.scroll');
+      if(!card) return;
+      var old=saveBtn.textContent; saveBtn.textContent='готовлю…'; saveBtn.disabled=true;
+      var done=function(){ saveBtn.textContent=old; saveBtn.disabled=false; };
+      (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(function(){
+        return html2canvas(card,{scale:2,backgroundColor:'#FFFBF6',useCORS:true,logging:false});
+      }).then(function(canvas){
+        canvas.toBlob(function(blob){
+          var url=URL.createObjectURL(blob);
+          var a=document.createElement('a');
+          a.href=url; a.download='связаны-15-вопросов.png';
+          document.body.appendChild(a); a.click(); a.remove();
+          setTimeout(function(){URL.revokeObjectURL(url);},1000);
+          done();
+        },'image/png');
+      }).catch(function(){ saveBtn.textContent='не получилось, попробуйте ещё раз'; setTimeout(done,2000); });
+    });
+  }
 
   // музыка: мягкий тумблер, не падаем если файла нет
   var mel=document.getElementById('mel'),mbtn=document.getElementById('mbtn'),on=false;
