@@ -245,6 +245,8 @@ body{background-image:url("assets/paper.png"),
 /* обложка */
 .hero-triptych{display:block;width:100%;max-width:540px;margin:22px auto 18px}
 
+#c-body>p:first-child{margin-top:6px}
+#c-body>p:first-child::first-letter{float:left;font-family:'Fraunces',serif;font-weight:400;font-size:2.7em;line-height:0.86;color:var(--wine);margin:0.02em 0.12em 0 0}
 /* объём карточек — многослойная мягкая тень */
 .paper{position:relative}
 .scroll,#c-spread{filter:drop-shadow(0 26px 46px rgba(90,26,43,0.20)) drop-shadow(0 8px 16px rgba(90,26,43,0.14)) drop-shadow(0 2px 4px rgba(90,26,43,0.10))}
@@ -473,10 +475,10 @@ body{background-image:url("assets/paper.png"),
     var h='';
 
     var INTRO=[
-      'есть люди, рядом с которыми становится тише и теплее. <b>'+nm+'</b> — из таких. эта страница — попытка сказать вслух то, что обычно чувствуешь молча.',
-      '<b>'+nm+'</b>. кажется, мы знаем близких наизусть — а потом садишься собрать про них книгу и понимаешь, как много осталось несказанным.',
-      '<b>'+nm+'</b>. эта страница — про то, каким '+G('его','её')+' видят те, кто любит, и что хочется сохранить, пока всё это рядом.',
-      '<b>'+nm+'</b>. иногда любовь проще показать, чем сказать словами — и эта страница про то, как всё-таки сказать.'
+      'есть люди, рядом с которыми становится тише и теплее. <b>'+nm+'</b> — как раз из таких, и эта страница — попытка сказать вслух то, что обычно чувствуешь молча.',
+      'кажется, что близких знаешь наизусть — а сядешь собрать про них книгу, и понимаешь, сколько всего осталось несказанным. <b>'+nm+'</b> — из таких людей.',
+      'эта страница — о том, как'+G('ой','ая')+' на самом деле <b>'+nm+'</b>, что за '+G('ним','ней')+' стоит и что хочется сохранить, пока всё это рядом.',
+      'иногда любовь проще показать, чем сказать словами. но <b>'+nm+'</b> заслуживает, чтобы это всё-таки прозвучало.'
     ];
     h+='<p>'+pick(INTRO,seed+'i')+'</p>';
 
@@ -574,15 +576,25 @@ body{background-image:url("assets/paper.png"),
 </script>
 <!-- фоновое музыкальное сопровождение «связаны» -->
 <audio id="svz-mel" loop preload="none" src="assets/svyazany-melody.mp3"></audio>
-<button id="svz-music" type="button" aria-label="музыкальное сопровождение" title="музыка">
-  <span class="svz-note">&#9834;</span>
+<button id="svz-music" type="button" aria-label="включить музыкальное сопровождение" title="музыка">
+  <svg class="svz-play" width="13" height="15" viewBox="0 0 13 15" aria-hidden="true"><path d="M2 1.4v12.2L12 7.5z" fill="currentColor"/></svg>
+  <span class="svz-note" aria-hidden="true">&#9834;</span>
+  <span class="svz-hint">музыка</span>
 </button>
 <style>
-#svz-music{position:fixed;right:18px;bottom:20px;z-index:9999;width:46px;height:46px;border-radius:50%;background:#FFFBF6;border:1px solid #6B1F33;color:#6B1F33;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 14px rgba(107,31,51,0.18);transition:background .2s,color .2s,box-shadow .2s;font-size:20px;line-height:1;padding:0}
-#svz-music .svz-note{transform:translateY(-1px)}
-#svz-music.playing{background:#6B1F33;color:#FFFBF6;box-shadow:0 0 0 6px rgba(107,31,51,0.10)}
-#svz-music:hover{box-shadow:0 4px 18px rgba(107,31,51,0.28)}
-@media(max-width:640px){#svz-music{width:42px;height:42px;right:14px;bottom:16px;font-size:18px}}
+#svz-music{position:fixed;right:18px;bottom:20px;z-index:9999;width:50px;height:50px;border-radius:50%;background:#FFFBF6;border:1px solid #6B1F33;color:#6B1F33;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s,box-shadow .2s;font-size:21px;line-height:1;padding:0}
+#svz-music .svz-play{display:block;margin-left:2px}
+#svz-music .svz-note{display:none;transform:translateY(-1px)}
+#svz-music.playing .svz-play{display:none}
+#svz-music.playing .svz-note{display:block}
+#svz-music.playing{background:#6B1F33;color:#FFFBF6;box-shadow:0 0 0 5px rgba(107,31,51,0.10),0 4px 18px rgba(107,31,51,0.25)}
+@keyframes svzPulse{0%{box-shadow:0 3px 16px rgba(107,31,51,0.20),0 0 0 0 rgba(107,31,51,0.30)}70%{box-shadow:0 3px 16px rgba(107,31,51,0.20),0 0 0 13px rgba(107,31,51,0)}100%{box-shadow:0 3px 16px rgba(107,31,51,0.20),0 0 0 0 rgba(107,31,51,0)}}
+#svz-music:not(.playing){animation:svzPulse 2.8s ease-out infinite}
+#svz-music:not(.playing):hover{animation-play-state:paused;box-shadow:0 4px 20px rgba(107,31,51,0.30)}
+#svz-music .svz-hint{position:absolute;right:60px;white-space:nowrap;font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--wine);background:#FFFBF6;padding:4px 11px;border:1px solid rgba(107,31,51,0.3);border-radius:14px;box-shadow:0 2px 10px rgba(107,31,51,0.14);opacity:0;transform:translateX(6px);transition:opacity .25s,transform .25s;pointer-events:none}
+#svz-music:hover .svz-hint{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){#svz-music:not(.playing){animation:none}}
+@media(max-width:640px){#svz-music{width:46px;height:46px;right:14px;bottom:16px;font-size:19px}#svz-music .svz-hint{display:none}}
 </style>
 <script>
 (function(){
