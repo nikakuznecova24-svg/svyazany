@@ -85,9 +85,6 @@ h1.big{font-size:clamp(24px,5vw,36px);line-height:1.16;margin:0 0 .35em}
 .scroll{
   position:relative;
   background:var(--wine);
-  background-image:
-    radial-gradient(600px circle at 12% 0%, rgba(255,251,246,0.05), transparent 55%),
-    radial-gradient(600px circle at 90% 100%, rgba(255,251,246,0.04), transparent 55%);
   color:var(--cream);
   border-style:solid;
   border-width:78px 60px;
@@ -95,6 +92,7 @@ h1.big{font-size:clamp(24px,5vw,36px);line-height:1.16;margin:0 0 .35em}
   padding:6px 10px 10px;
   margin:30px 0
 }
+@media(max-width:640px){.scroll{border-width:52px 34px;border-image-width:52px 34px}}
 @media(max-width:640px){.scroll{border-width:52px 34px;border-image-slice:150 112;border-image-width:52px 34px}}
 
 
