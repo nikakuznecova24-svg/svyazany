@@ -1867,8 +1867,10 @@ i,em,cite,address{font-style:normal}
             <span class="brand-seal"><img src="assets/logo.png" alt="связаны"></span>
           </div>
           <h3>не получилось отправить</h3>
-          <p style="margin:16px 0 20px;color:var(--ink-soft);font-size:16px;">кажется, что-то со связью. напишите нам напрямую — мы всё примем.</p>
-          <a class="btn-primary" href="https://t.me/nikakuznecovaa" target="_blank" rel="noopener">написать в telegram</a>
+          <p style="margin:16px 0 22px;color:var(--ink-soft);font-size:16px;">кажется, что-то со связью. попробуйте снова или напишите нам напрямую.</p>
+          <button type="button" id="orderRetry" class="btn-primary" style="border:none;cursor:pointer;margin-bottom:12px;">попробовать снова</button>
+          <br>
+          <a href="https://t.me/nikakuznecovaa" target="_blank" rel="noopener" style="color:var(--ink-soft);">написать в telegram</a>
         </div>
       </div>
     </div>
@@ -3247,6 +3249,12 @@ orderForm.addEventListener('submit', async (e) => {
     btn.disabled = false; btn.textContent = bt;
   }
 });
+  const retryBtn = document.getElementById('orderRetry');
+  if (retryBtn) retryBtn.addEventListener('click', () => {
+    const oe = document.getElementById('orderError');
+    if (oe) oe.classList.remove('active');
+    orderForm.style.display = '';
+  });
 
 // ---- Ambient sound toggle ----
 const soundToggle = document.getElementById('soundToggle');
