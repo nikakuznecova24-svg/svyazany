@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Связаны — материалы</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FFFBF6;
+  --cream-warm:#FBF1E4;
+  --cream-deep:#F3E4D6;
+  --wine:#6B1F33;
+  --wine-deep:#5A1A2B;
+  --ink:#2B211C;
+  --ink-soft:#5A4F47;
+  --tan:#D9C3B0;
+  --rose:#B98A7B;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background-color:var(--cream);
+  background-image:
+    radial-gradient(720px circle at 8% 3%, rgba(107,31,51,0.05), transparent 60%),
+    radial-gradient(760px circle at 94% 20%, rgba(107,31,51,0.045), transparent 58%),
+    radial-gradient(700px circle at 12% 62%, rgba(107,31,51,0.04), transparent 60%),
+    radial-gradient(820px circle at 96% 96%, rgba(107,31,51,0.05), transparent 58%);
+  color:var(--ink);
+  font-family:'EB Garamond', Georgia, serif;
+  font-size:19px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:760px;margin:0 auto;padding:56px 22px 90px}
+.hairline{border:0;border-top:1px solid rgba(107,31,51,0.28);margin:52px 0}
+h1,h2,h3{font-family:'Fraunces', Georgia, serif;font-weight:400;color:var(--wine);line-height:1.18;margin:0 0 .5em}
+h1{font-size:clamp(34px,7vw,52px);letter-spacing:.2px}
+h2{font-size:clamp(25px,5vw,34px);margin-top:0}
+h3{font-size:20px;font-weight:500;color:var(--wine-deep);letter-spacing:.04em;text-transform:uppercase}
+.script{font-family:'Mrs Saint Delafield', cursive;color:var(--wine);font-size:1.8em;line-height:1}
+.lead{font-family:'Cormorant Garamond', serif;font-size:clamp(20px,3.6vw,24px);font-style:italic;color:var(--ink-soft)}
+p{margin:0 0 1.05em}
+a{color:var(--wine);text-decoration:none;border-bottom:1px solid rgba(107,31,51,0.4)}
+a:hover{border-bottom-color:var(--wine)}
+
+/* engraved frame */
+.frame{
+  position:relative;
+  background:var(--cream-warm);
+  border:1px solid rgba(107,31,51,0.45);
+  padding:38px 34px;
+  margin:34px 0;
+}
+.frame::before{
+  content:"";position:absolute;inset:6px;
+  border:1px solid rgba(107,31,51,0.28);
+  pointer-events:none;
+}
+.frame .corner{position:absolute;width:26px;height:26px;color:var(--wine);opacity:.6}
+.frame .corner.tl{top:-2px;left:-2px}
+.frame .corner.tr{top:-2px;right:-2px;transform:scaleX(-1)}
+.frame .corner.bl{bottom:-2px;left:-2px;transform:scaleY(-1)}
+.frame .corner.br{bottom:-2px;right:-2px;transform:scale(-1)}
+
+header{text-align:center;margin-bottom:14px}
+header .brand{font-family:'Mrs Saint Delafield', cursive;font-size:44px;color:var(--wine);line-height:.9}
+header .tagline{font-family:'Cormorant Garamond', serif;font-style:italic;color:var(--ink-soft);letter-spacing:.06em;margin-top:6px}
+
+.intro{text-align:center;margin:30px 0 8px}
+
+/* guide list */
+.group-label{font-family:'Fraunces',serif;font-style:italic;color:var(--wine);font-size:22px;margin:30px 0 10px}
+ol.guide{margin:0;padding:0;list-style:none;counter-reset:q}
+ol.guide li{counter-increment:q;position:relative;padding:11px 0 11px 46px;border-bottom:1px dotted rgba(107,31,51,0.25)}
+ol.guide li::before{
+  content:counter(q);position:absolute;left:0;top:9px;
+  font-family:'Fraunces',serif;font-size:20px;color:var(--rose);
+  width:32px;text-align:right
+}
+
+.btnrow{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:26px 0 4px}
+.btn{
+  font-family:'Cormorant Garamond', serif;font-size:19px;letter-spacing:.05em;
+  padding:13px 26px;border:1px solid var(--wine);color:var(--wine);
+  background:transparent;cursor:pointer;text-decoration:none;border-radius:0;
+  transition:background .18s,color .18s
+}
+.btn:hover{background:var(--wine);color:var(--cream)}
+.btn.solid{background:var(--wine);color:var(--cream)}
+.btn.solid:hover{background:var(--wine-deep)}
+
+/* constructor */
+.field{margin:14px 0}
+label{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink-soft);margin-bottom:5px;font-size:18px}
+input,textarea{
+  width:100%;font-family:'EB Garamond',serif;font-size:18px;color:var(--ink);
+  background:var(--cream);border:1px solid rgba(107,31,51,0.4);padding:10px 12px;border-radius:0
+}
+textarea{min-height:74px;resize:vertical}
+input:focus,textarea:focus{outline:none;border-color:var(--wine)}
+.hint{font-size:15px;color:var(--ink-soft);font-style:italic}
+
+/* spread preview */
+.spread{
+  background:var(--cream-deep);
+  background-image:radial-gradient(520px circle at 20% 0%, rgba(107,31,51,0.06), transparent 60%);
+  border:1px solid rgba(107,31,51,0.4);
+  padding:40px 34px;margin-top:22px;position:relative
+}
+.spread::before{content:"";position:absolute;inset:7px;border:1px solid rgba(107,31,51,0.25);pointer-events:none}
+.spread .issue{font-family:'Cormorant Garamond',serif;font-style:italic;letter-spacing:.22em;text-transform:uppercase;font-size:13px;color:var(--rose);text-align:center}
+.spread .who{font-family:'Fraunces',serif;font-size:clamp(30px,7vw,44px);color:var(--wine);text-align:center;margin:6px 0 4px;line-height:1.05}
+.spread .rubric{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink-soft);text-align:center;letter-spacing:.08em;margin-bottom:18px}
+.spread .body{font-family:'EB Garamond',serif;font-size:18px;line-height:1.7;color:var(--ink)}
+.spread .body b{color:var(--wine-deep)}
+.spread .sign{font-family:'Mrs Saint Delafield',cursive;font-size:30px;color:var(--wine);text-align:right;margin-top:16px;line-height:1}
+
+.music{display:flex;align-items:center;gap:12px;justify-content:center;margin:8px 0 0;font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink-soft)}
+.music button{
+  font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;
+  border:1px solid var(--wine);color:var(--wine);background:transparent;
+  padding:7px 16px;cursor:pointer
+}
+.music button:hover{background:var(--wine);color:var(--cream)}
+
+footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Cormorant Garamond',serif;font-style:italic}
+.small{font-size:15px;color:var(--ink-soft)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brand">связаны</div>
+    <div class="tagline">персональные журналы и книги о людях и о связи</div>
+  </header>
+
+  <div class="intro">
+    <h1>с этого начинается<br>любая наша книга</h1>
+    <p class="lead">бесплатно. бери и пользуйся — для подарка, для письма,<br>или просто чтобы узнать близкого чуть глубже.</p>
+  </div>
+
+  <hr class="hairline">
+
+  <!-- ГАЙД -->
+  <section>
+    <h2>15 вопросов,<br>чтобы узнать близкого по-настоящему</h2>
+    <p>Задай их человеку напрямую, или собери ответы у тех, кто его любит.
+       Это те самые вопросы, с которых мы начинаем каждую книгу.</p>
+
+    <div class="frame">
+      <span class="corner tl">&#10086;</span><span class="corner tr">&#10086;</span>
+      <span class="corner bl">&#10086;</span><span class="corner br">&#10086;</span>
+
+      <div class="group-label">Путь и характер</div>
+      <ol class="guide">
+        <li>С чего начался его путь — какие люди и события сделали его тем, кто он есть?</li>
+        <li>Каким он был в детстве? Что из того ребёнка осталось в нём сейчас?</li>
+        <li>Какой самый трудный период он прошёл — и как из него вышел?</li>
+        <li>За что его особенно ценят те, кто его знает?</li>
+        <li>Какие три качества в нём — самые его?</li>
+        <li>Что он любит по-настоящему? А что не выносит?</li>
+        <li>Какая у него привычка или странность, за которую его любят?</li>
+      </ol>
+
+      <div class="group-label">Вы вдвоём</div>
+      <ol class="guide" start="8">
+        <li>Когда ты видел его по-настоящему сильным?</li>
+        <li>Что он даёт людям — что они чувствуют рядом с ним?</li>
+        <li>Какой ваш общий момент ты будешь помнить всегда?</li>
+        <li>Что вы прошли вместе, о чём мало кто знает?</li>
+        <li>Что ты понял о нём не сразу, а со временем?</li>
+      </ol>
+
+      <div class="group-label">Чувства и будущее</div>
+      <ol class="guide" start="13">
+        <li>Что ты никогда не говорил ему вслух, но хотел бы?</li>
+        <li>Каким ты видишь его через пять лет? Чего ему желаешь?</li>
+        <li>Если бы он услышал от тебя одну фразу — какую?</li>
+      </ol>
+    </div>
+
+    <div class="btnrow">
+      <a class="btn" id="dl" href="svyazany-15-voprosov.pdf" download>скачать гайд в PDF</a>
+    </div>
+  </section>
+
+  <hr class="hairline">
+
+  <!-- МИНИ-КОНСТРУКТОР -->
+  <section>
+    <h2>Мини-конструктор разворота</h2>
+    <p>Впиши имя и несколько фактов — и увидишь, как это выглядело бы
+       на странице твоего журнала «Связаны». Ничего не сохраняется, это просто набросок для тебя.</p>
+
+    <div class="field">
+      <label for="who">Имя человека</label>
+      <input id="who" type="text" maxlength="40" placeholder="например, мама">
+    </div>
+    <div class="field">
+      <label for="occ">Повод / рубрика</label>
+      <input id="occ" type="text" maxlength="60" placeholder="например, к 50-летию">
+    </div>
+    <div class="field">
+      <label for="f1">Факт первый</label>
+      <input id="f1" type="text" maxlength="120" placeholder="что в нём главное">
+    </div>
+    <div class="field">
+      <label for="f2">Факт второй</label>
+      <input id="f2" type="text" maxlength="120" placeholder="за что его любят">
+    </div>
+    <div class="field">
+      <label for="f3">Факт третий</label>
+      <input id="f3" type="text" maxlength="120" placeholder="что он дал тебе">
+    </div>
+
+    <div class="spread" id="spread">
+      <div class="issue">Связаны &nbsp;·&nbsp; выпуск о человеке</div>
+      <div class="who" id="p-who">Имя</div>
+      <div class="rubric" id="p-occ">слово редактора</div>
+      <div class="body" id="p-body">Здесь появится тёплый разворот о твоём человеке — как только ты впишешь пару фактов выше.</div>
+      <div class="sign">связаны</div>
+    </div>
+  </section>
+
+  <hr class="hairline">
+
+  <!-- МУЗЫКА -->
+  <section>
+    <div class="music">
+      <span>мелодия «Связаны»</span>
+      <button id="mbtn" type="button">включить</button>
+    </div>
+    <p class="small" style="text-align:center;margin-top:10px">включается по желанию, тихо, фоном</p>
+    <audio id="mel" loop preload="none" src="assets/svyazany-melody.mp3"></audio>
+  </section>
+
+  <hr class="hairline">
+
+  <!-- ФИНАЛ -->
+  <section style="text-align:center">
+    <h2>хочешь такую книгу<br>для своего человека?</h2>
+    <p class="lead">мы соберём её из слов тех, кто его любит,<br>и свёрстаем как настоящее издание.</p>
+    <div class="btnrow">
+      <a class="btn solid" href="https://svyazany.ru">форматы и цены</a>
+      <a class="btn" href="https://t.me/nikakuznecovaa">написать нам</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="script">связаны</div>
+    <p class="small">книги и журналы, которые соединяют людей страницами</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  // мини-конструктор: чистая подстановка, без генерации
+  var who=document.getElementById('who'),occ=document.getElementById('occ'),
+      f1=document.getElementById('f1'),f2=document.getElementById('f2'),f3=document.getElementById('f3'),
+      pWho=document.getElementById('p-who'),pOcc=document.getElementById('p-occ'),pBody=document.getElementById('p-body');
+  function esc(s){return (s||'').replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
+  function cap(s){s=(s||'').trim();return s?s.charAt(0).toUpperCase()+s.slice(1):s;}
+  function render(){
+    var name=cap(who.value)||'Имя';
+    pWho.textContent=name;
+    pOcc.textContent=occ.value.trim()?occ.value.trim():'слово редактора';
+    var facts=[f1.value,f2.value,f3.value].map(function(x){return x.trim();}).filter(Boolean);
+    if(!facts.length){
+      pBody.innerHTML='Здесь появится тёплый разворот о твоём человеке — как только ты впишешь пару фактов выше.';
+      return;
+    }
+    var n=esc(name);
+    var parts=[];
+    if(facts[0]) parts.push('Если коротко о том, кто такой <b>'+n+'</b> — это '+esc(facts[0].toLowerCase())+'.');
+    if(facts[1]) parts.push('Те, кто рядом, любят его за то, что '+esc(facts[1].toLowerCase())+'.');
+    if(facts[2]) parts.push('А для меня главное — '+esc(facts[2].toLowerCase())+'.');
+    parts.push('Эта книга — чтобы <b>'+n+'</b> однажды открыл её и почувствовал, как много о нём хочется сказать.');
+    pBody.innerHTML=parts.join(' ');
+  }
+  [who,occ,f1,f2,f3].forEach(function(el){el.addEventListener('input',render);});
+  render();
+
+  // музыка: мягкий тумблер, не падаем если файла нет
+  var mel=document.getElementById('mel'),mbtn=document.getElementById('mbtn'),on=false;
+  mbtn.addEventListener('click',function(){
+    if(!on){
+      var p=mel.play();
+      if(p&&p.then){p.then(function(){on=true;mbtn.textContent='выключить';})
+        .catch(function(){mbtn.textContent='мелодия скоро появится';});}
+      else{on=true;mbtn.textContent='выключить';}
+    }else{
+      mel.pause();on=false;mbtn.textContent='включить';
+    }
+  });
+
+  // если PDF гайда ещё не залит — прячем кнопку скачивания при 404
+  fetch('svyazany-15-voprosov.pdf',{method:'HEAD'}).then(function(r){
+    if(!r.ok){document.getElementById('dl').style.display='none';}
+  }).catch(function(){});
+})();
+</script>
+</body>
+</html>
