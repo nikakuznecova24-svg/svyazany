@@ -174,6 +174,8 @@ input:focus,textarea:focus{outline:none;border-color:var(--wine)}
 .spread .c-sub::after{content:"";flex:1;height:1px;background:rgba(107,31,51,0.26)}
 .spread .c-sub:first-child{margin-top:2px}
 .spread .c-q{color:var(--wine-deep);margin:6px 0 1px}
+.spread .c-plaque{background:var(--wine);color:var(--cream);border-radius:16px;padding:16px 20px;margin:24px 0 12px;font-family:'EB Garamond',serif;font-size:14.5px;line-height:1.42;box-shadow:0 14px 30px rgba(90,26,43,0.24),inset 0 1px 0 rgba(255,255,255,0.08)}
+.spread .c-fmt{text-align:center;margin:2px 0 0;font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--wine)}
 .spread .c-list{margin:2px 0 0;padding:0;list-style:none}
 .spread .c-list li{padding-left:20px;position:relative;line-height:1.4}
 .spread .c-list li::before{content:"—";position:absolute;left:0;color:var(--wine)}
@@ -552,13 +554,9 @@ body{background-image:url("assets/paper.png"),
       h+='<p class="c-q">— Какой момент '+G('с ним','с ней')+' хочется прожить ещё раз</p><p>'+capS(esc(iva))+'</p>';
     }
 
-    var CLOSE=[
-      'такие слова хочется хранить не в заметках, а в настоящей книге. однажды <b>'+nm+'</b> откроет её — и увидит, сколько за ней любви.',
-      'это лишь одна страница. а бывает целая книга — про одного человека, собранная с любовью и свёрстанная как настоящее издание, и подаренная тому, о ком она.',
-      'такое собирают не за день — по фразе, по случаю, по тёплому воспоминанию. <b>'+nm+'</b> возьмёт такую книгу и поймёт, что этого человека по-настоящему знают.',
-      'и если сейчас внутри что-то дрогнуло — значит, <b>'+nm+'</b> правда стоит такой книги. соберём её вместе, бережно.'
-    ];
-    h+='<p class="c-sub">несколько слов</p><p>'+capS(pick(CLOSE,seed+'c'))+'</p>';
+    var closeTxt='это лишь одна страница. а бывает целая книга — про одного человека, собранная с любовью и свёрстанная как настоящее издание, и подаренная тому, о ком она.';
+    h+='<div class="c-plaque">'+capS(closeTxt)+'</div>';
+    h+='<p class="c-fmt">форматы и цены на svyazany.ru</p>';
 
     bodyEl.innerHTML=h;
   }
@@ -622,6 +620,14 @@ body{background-image:url("assets/paper.png"),
       if(el.classList.contains('c-hint')) continue;
       if(el.classList.contains('c-sub')){
         y+=26*S; ops.push({t:'sub',s:txt,y:y}); y+=21*S;
+      } else if(el.classList.contains('c-plaque')){
+        m.font=F_BODY;
+        var plines=wrapLine(m,txt,maxw-40*S);
+        var boxTop=y, textStart=y+24*S, boxBot=textStart+plines.length*20*S+6*S;
+        ops.push({t:'plaque',lines:plines,boxTop:boxTop,boxBot:boxBot,textStart:textStart});
+        y=boxBot+14*S;
+      } else if(el.classList.contains('c-fmt')){
+        y+=6*S; ops.push({t:'fmt',s:txt,y:y}); y+=12*S;
       } else if(el.tagName==='UL'){
         var lis=el.querySelectorAll('li');
         m.font=F_BODY;
@@ -660,6 +666,15 @@ body{background-image:url("assets/paper.png"),
           var tw=m.measureText(o.s).width; m.strokeStyle='rgba(107,31,51,0.26)';m.lineWidth=1*S;
           m.beginPath();m.moveTo(x+tw+10*S,o.y-4*S);m.lineTo(W-PAD,o.y-4*S);m.stroke();}
         else if(o.t==='firstline'){m.fillStyle=WINE;m.font='400 '+Math.round(15.5*S*1.75)+"px 'Fraunces', Georgia, serif";m.fillText(o.head,x,o.y);var hw=m.measureText(o.head).width;m.font=F_BODY;m.fillStyle=INK;m.fillText(o.rest,x+hw+2*S,o.y);}
+        else if(o.t==='plaque'){
+          var pw=W-PAD*2, rx=x, ry=o.boxTop, rh=o.boxBot-o.boxTop, rr=12*S;
+          m.beginPath();m.moveTo(rx+rr,ry);m.arcTo(rx+pw,ry,rx+pw,ry+rh,rr);m.arcTo(rx+pw,ry+rh,rx,ry+rh,rr);m.arcTo(rx,ry+rh,rx,ry,rr);m.arcTo(rx,ry,rx+pw,ry,rr);m.closePath();
+          m.fillStyle=WINE;m.fill();
+          m.font=F_BODY;m.fillStyle='#FBF1E4';m.textAlign='left';
+          var ly=o.textStart;
+          for(var pj=0;pj<o.lines.length;pj++){m.fillText(o.lines[pj],x+18*S,ly);ly+=20*S;}
+        }
+        else if(o.t==='fmt'){m.font=F_SUB;m.fillStyle=WINE;m.textAlign='center';m.fillText(o.s,W/2,o.y);m.textAlign='left';}
         else if(o.t==='q'){m.font=F_BODY;m.fillStyle=WINED;m.fillText(o.s,x,o.y);}
         else {m.font=F_BODY;m.fillStyle=INK;m.fillText(o.s,x,o.y);}
       }
