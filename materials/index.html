@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>связаны — материалы</title>
+<title>связаны — материалы</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
@@ -146,6 +146,21 @@ input,textarea{
 textarea{min-height:74px;resize:vertical}
 input:focus,textarea:focus{outline:none;border-color:var(--wine)}
 .hint{font-size:15px;color:var(--ink-soft);}
+.label-row{display:block;font-family:'Cormorant Garamond',serif;color:var(--ink-soft);margin-bottom:5px;font-size:18px}
+.c-gender{display:flex;gap:22px}
+.c-gender label{display:flex;align-items:center;gap:6px;font-family:'EB Garamond',serif;font-size:17px;color:var(--ink);margin:0}
+.c-check{display:flex;align-items:center;gap:8px;margin:20px 0 4px;font-family:'EB Garamond',serif;font-size:17px;color:var(--ink);cursor:pointer}
+#c-iv .field{margin:10px 0}
+#c-iv select{width:100%;font-family:'EB Garamond',serif;font-size:17px;color:var(--ink);background:var(--cream);border:1px solid rgba(107,31,51,0.4);padding:9px 12px;margin-bottom:8px;border-radius:0}
+#c-spread .who{font-size:clamp(26px,6vw,38px)}
+.spread .c-sub{font-family:'Cormorant Garamond',serif;color:var(--wine);font-size:16px;margin:16px 0 4px}
+.spread .c-q{color:var(--wine-deep);margin:10px 0 2px}
+.spread .c-list{margin:4px 0 0;padding:0;list-style:none}
+.spread .c-list li{padding-left:16px;position:relative;line-height:1.6}
+.spread .c-list li::before{content:"4";position:absolute;left:0;color:var(--wine)}
+.spread .c-hint{color:var(--ink-soft)}
+.spread .body p{margin:0 0 8px}
+
 
 /* spread preview */
 .spread{
@@ -202,7 +217,7 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
       <span class="step">1</span>
       <div>
         <h1 class="big">15 вопросов,<br>чтобы узнать близкого по-настоящему</h1>
-        <p class="qsub">настоящая близость начинается там, где ты по-настоящему видишь другого</p>
+        <p class="qsub">настоящая близость начинается там, где ты по-настоящему видишь другого</p>
       </div>
     </div>
 
@@ -210,29 +225,29 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
 
       <p class="grp">путь и характер</p>
       <ol class="guide">
-        <li>с чего начался его путь — какие люди и события сделали его тем, кто он есть?</li>
-        <li>каким он был в детстве? что из того ребёнка осталось в нём сейчас?</li>
-        <li>какой самый трудный период он прошёл — и как из него вышел?</li>
-        <li>за что его особенно ценят те, кто его знает?</li>
-        <li>какие три качества больше всего его описывают?</li>
-        <li>что он любит по-настоящему? а с чем никогда не станет мириться?</li>
-        <li>какая у него привычка или странность, за которую его любят?</li>
+        <li>с чего начался его путь — какие люди и события сделали его тем, кто он есть?</li>
+        <li>каким он был в детстве? что из того ребёнка осталось в нём сейчас?</li>
+        <li>какой самый трудный период он прошёл — и как из него вышел?</li>
+        <li>за что его особенно ценят те, кто его знает?</li>
+        <li>какие три качества больше всего его описывают?</li>
+        <li>что он любит по-настоящему? а с чем никогда не станет мириться?</li>
+        <li>какая у него привычка или странность, за которую его любят?</li>
       </ol>
 
-      <p class="grp">как ты его чувствуешь?</p>
+      <p class="grp">как ты его чувствуешь?</p>
       <ol class="guide" start="8">
-        <li>когда ты видел его по-настоящему сильным?</li>
-        <li>что он даёт людям — что они чувствуют рядом с ним?</li>
-        <li>какой ваш общий момент ты будешь помнить всегда?</li>
-        <li>что вы прошли вместе, о чём мало кто знает?</li>
-        <li>что ты понял о нём не сразу, а со временем?</li>
+        <li>когда ты видел его по-настоящему сильным?</li>
+        <li>что он даёт людям — что они чувствуют рядом с ним?</li>
+        <li>какой ваш общий момент ты будешь помнить всегда?</li>
+        <li>что вы прошли вместе, о чём мало кто знает?</li>
+        <li>что ты понял о нём не сразу, а со временем?</li>
       </ol>
 
       <p class="grp">чувства и будущее</p>
       <ol class="guide" start="13">
-        <li>что ты никогда не говорил ему вслух, но хотел бы?</li>
-        <li>каким ты видишь его через пять лет? чего ему желаешь?</li>
-        <li>если бы у тебя была возможность сказать ему только одну фразу — какую?</li>
+        <li>что ты никогда не говорил ему вслух, но хотел бы?</li>
+        <li>каким ты видишь его через пять лет? чего ему желаешь?</li>
+        <li>если бы у тебя была возможность сказать ему только одну фразу — какую?</li>
       </ol>
     </div>
 
@@ -243,44 +258,87 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
 
   <hr class="hairline">
 
-  <!-- мини-конструктор -->
+  <!-- конструктор разворота -->
   <section>
     <div class="block-head">
       <span class="step">2</span>
       <div>
-        <h1 class="big">мини-конструктор разворота</h1>
-        <p class="qsub">впиши имя и несколько фактов — и увидишь набросок страницы о нём</p>
+        <h1 class="big">конструктор разворота</h1>
+        <p class="qsub">впиши пару слов о человеке — и увидишь, как будет выглядеть страница о нём</p>
       </div>
     </div>
-    <p class="small">ничего не сохраняется, это просто эскиз для тебя.</p>
+    <p class="small">чем подробнее ответишь, тем объёмнее и глубже получится страница. ничего не сохраняется — это эскиз для тебя.</p>
 
     <div class="field">
-      <label for="who">имя человека</label>
-      <input id="who" type="text" maxlength="40" placeholder="например, мама">
+      <label for="c-name">имя человека</label>
+      <input id="c-name" type="text" maxlength="40" placeholder="например, папа">
     </div>
     <div class="field">
-      <label for="occ">повод / рубрика</label>
-      <input id="occ" type="text" maxlength="60" placeholder="например, к 50-летию">
+      <label for="c-occ">повод</label>
+      <input id="c-occ" type="text" maxlength="70" placeholder="например, к 60-летию — или «просто так»">
     </div>
     <div class="field">
-      <label for="f1">факт первый</label>
-      <input id="f1" type="text" maxlength="120" placeholder="что в нём главное">
+      <span class="label-row">о ком речь</span>
+      <div class="c-gender">
+        <label><input type="radio" name="c-g" value="m" checked> он</label>
+        <label><input type="radio" name="c-g" value="f"> она</label>
+      </div>
     </div>
     <div class="field">
-      <label for="f2">факт второй</label>
-      <input id="f2" type="text" maxlength="120" placeholder="за что его любят">
+      <label for="c-life">чем живёт сейчас</label>
+      <input id="c-life" type="text" maxlength="180" placeholder="например: работает на заводе, возится в гараже">
     </div>
     <div class="field">
-      <label for="f3">факт третий</label>
-      <input id="f3" type="text" maxlength="120" placeholder="что он дал тебе">
+      <label for="c-path">что прошёл</label>
+      <input id="c-path" type="text" maxlength="180" placeholder="например: один поднимал троих">
+    </div>
+    <div class="field">
+      <label for="c-str">сильные стороны — через запятую</label>
+      <input id="c-str" type="text" maxlength="180" placeholder="например: надёжный, спокойный, руки золотые">
     </div>
 
-    <div class="spread" id="spread">
-      <div class="issue">связаны &nbsp;·&nbsp; выпуск о человеке</div>
-      <div class="who" id="p-who">имя</div>
-      <div class="rubric" id="p-occ">слово редактора</div>
-      <div class="body" id="p-body">здесь появится тёплый разворот о твоём человеке — как только ты впишешь пару фактов выше.</div>
+    <label class="c-check"><input type="checkbox" id="c-iv-on"> добавить интервью — по желанию</label>
+    <div id="c-iv" hidden>
+      <div class="field">
+        <label for="c-q1">вопрос</label>
+        <select id="c-q1">
+          <option value="">— выбери вопрос —</option>
+          <option>момент, который хочется прожить ещё раз</option>
+          <option>что делает счастливее всего</option>
+          <option>за что благодарность себе</option>
+          <option>о чём мечты</option>
+          <option>совет себе десятилетней давности</option>
+          <option>что дороже всего в людях</option>
+        </select>
+        <input id="c-a1" type="text" maxlength="220" placeholder="ответ">
+      </div>
+      <div class="field">
+        <label for="c-q2">ещё вопрос</label>
+        <select id="c-q2">
+          <option value="">— выбери вопрос —</option>
+          <option>момент, который хочется прожить ещё раз</option>
+          <option>что делает счастливее всего</option>
+          <option>за что благодарность себе</option>
+          <option>о чём мечты</option>
+          <option>совет себе десятилетней давности</option>
+          <option>что дороже всего в людях</option>
+        </select>
+        <input id="c-a2" type="text" maxlength="220" placeholder="ответ">
+      </div>
+    </div>
+
+    <div class="spread" id="c-spread">
+      <div class="issue" id="c-issue">связаны · выпуск о человеке</div>
+      <div class="who" id="c-who">имя в деталях</div>
+      <div class="body" id="c-body">
+        <p class="c-hint">здесь вживую соберётся эскиз страницы — начни заполнять поля выше.</p>
+      </div>
       <img class="sign" src="assets/logo.png" alt="связаны">
+    </div>
+
+    <p class="small" style="text-align:center;margin-top:18px">это набросок одной страницы. вся книга собирается из десятков таких.</p>
+    <div class="btnrow" style="justify-content:center">
+      <a class="btn solid" href="https://svyazany.ru">выбрать формат</a>
     </div>
   </section>
 
@@ -290,8 +348,8 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
 
   <!-- финал -->
   <section style="text-align:center">
-    <h2>хочешь такую книгу<br>для своего человека?</h2>
-    <p class="lead">мы соберём её из слов тех, кто его любит,<br>и свёрстаем как настоящее издание.</p>
+    <h2>хочешь такую книгу<br>для своего человека?</h2>
+    <p class="lead">мы соберём её из слов тех, кто его любит,<br>и свёрстаем как настоящее издание.</p>
     <div class="btnrow">
       <a class="btn solid" href="https://svyazany.ru">форматы и цены</a>
       <a class="btn" href="https://t.me/nikakuznecovaa">написать нам</a>
@@ -307,46 +365,81 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
 
 <script>
 (function(){
-  // мини-конструктор: чистая подстановка, без генерации
-  var who=document.getElementById('who'),occ=document.getElementById('occ'),
-      f1=document.getElementById('f1'),f2=document.getElementById('f2'),f3=document.getElementById('f3'),
-      pWho=document.getElementById('p-who'),pOcc=document.getElementById('p-occ'),pBody=document.getElementById('p-body');
+  var $=function(id){return document.getElementById(id);};
+  var nameEl=$('c-name'),occEl=$('c-occ'),lifeEl=$('c-life'),pathEl=$('c-path'),strEl=$('c-str'),
+      ivOn=$('c-iv-on'),ivBox=$('c-iv'),q1=$('c-q1'),a1=$('c-a1'),q2=$('c-q2'),a2=$('c-a2'),
+      issueEl=$('c-issue'),whoEl=$('c-who'),bodyEl=$('c-body');
+  if(!nameEl||!bodyEl) return;
+
   function esc(s){return (s||'').replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
-  function cap(s){s=(s||'').trim();return s?s.charAt(0).toUpperCase()+s.slice(1):s;}
+  function tr(s){return (s||'').replace(/\s+/g,' ').trim();}
+  function cap(s){s=tr(s);return s?s.charAt(0).toUpperCase()+s.slice(1):s;}
+  function lc(s){s=tr(s);return s?s.charAt(0).toLowerCase()+s.slice(1):s;}
+  function noDot(s){return tr(s).replace(/[.!,;:—-]+$/,'').trim();}
+  function gv(){var r=document.querySelector('input[name="c-g"]:checked');return r?r.value:'m';}
+  function G(m,f){return gv()==='f'?f:m;}
+
+  if(ivOn){ivOn.addEventListener('change',function(){if(ivBox)ivBox.hidden=!ivOn.checked;render();});}
+
   function render(){
-    var name=cap(who.value)||'имя';
-    pWho.textContent=name;
-    pOcc.textContent=occ.value.trim()?occ.value.trim():'слово редактора';
-    var facts=[f1.value,f2.value,f3.value].map(function(x){return x.trim();}).filter(Boolean);
-    if(!facts.length){
-      pBody.innerHTML='здесь появится тёплый разворот о твоём человеке — как только ты впишешь пару фактов выше.';
+    var name=cap(nameEl.value);
+    var nm=esc(name||'имя');
+    var occ=noDot(occEl.value);
+    var life=lc(noDot(lifeEl.value));
+    var path=lc(noDot(pathEl.value));
+    var strs=(strEl.value||'').split(',').map(function(x){return lc(noDot(x));}).filter(Boolean).slice(0,6);
+
+    issueEl.textContent='связаны · выпуск о человеке'+(occ?' · '+occ:'');
+    whoEl.textContent=(name||'имя')+' в деталях';
+
+    if(!name && !life && !path && !strs.length){
+      bodyEl.innerHTML='<p class="c-hint">здесь вживую соберётся эскиз страницы — начни заполнять поля выше.</p>';
       return;
     }
-    var n=esc(name);
-    var parts=[];
-    if(facts[0]) parts.push('если коротко о том, кто такой <b>'+n+'</b> — это '+esc(facts[0].toLowerCase())+'.');
-    if(facts[1]) parts.push('те, кто рядом, любят его за то, что '+esc(facts[1].toLowerCase())+'.');
-    if(facts[2]) parts.push('а для меня главное — '+esc(facts[2].toLowerCase())+'.');
-    parts.push('эта книга — чтобы <b>'+n+'</b> однажды открыл её и почувствовал, как много о нём хочется сказать.');
-    pBody.innerHTML=parts.join(' ');
-  }
-  [who,occ,f1,f2,f3].forEach(function(el){el.addEventListener('input',render);});
-  render();
 
+    var h='';
+    // vstuplenie
+    var intro;
+    if(strs.length>=2) intro='<b>'+nm+'</b> — человек, в котором чувствуется '+esc(strs[0])+' и '+esc(strs[1])+'. '+G('его','её')+' узнают по этому, и рядом с '+G('ним','ней')+' спокойно.';
+    else if(strs.length===1) intro='<b>'+nm+'</b> — человек, в котором чувствуется '+esc(strs[0])+'. рядом с '+G('ним','ней')+' спокойно и надёжно.';
+    else intro='<b>'+nm+'</b> — человек, о котором хочется рассказать по-настоящему, не в двух словах.';
+    h+='<p>'+intro+'</p>';
 
-  // музыка: мягкий тумблер, не падаем если файла нет
-  var mel=document.getElementById('mel'),mbtn=document.getElementById('mbtn'),on=false;
-  mbtn.addEventListener('click',function(){
-    if(!on){
-      var p=mel.play();
-      if(p&&p.then){p.then(function(){on=true;mbtn.textContent='выключить';})
-        .catch(function(){mbtn.textContent='мелодия скоро появится';});}
-      else{on=true;mbtn.textContent='выключить';}
-    }else{
-      mel.pause();on=false;mbtn.textContent='включить';
+    // istoriya
+    if(life||path){
+      var st=[];
+      if(life) st.push('сегодня <b>'+nm+'</b> '+esc(life)+' — и в этом '+G('он','она')+' на своём месте.');
+      if(path) st.push('за плечами '+G('у него','у неё')+' непростое: '+esc(path)+'. это не сломало '+G('его','её')+' — сделало опорой для тех, кто рядом.');
+      if(life&&path) st.push('и сегодня в '+G('нём','ней')+' то же самое — то, за что '+G('его','её')+' любят и на что можно опереться.');
+      h+='<p class="c-sub">история одно'+G('го мужчины','й женщины')+'</p><p>'+st.join(' ')+'</p>';
     }
-  });
 
+    // silnye storony
+    if(strs.length){
+      h+='<p class="c-sub">сильные стороны</p><p>те, кто рядом, узнают '+G('его','её')+' по этому:</p><ul class="c-list">';
+      strs.forEach(function(s){h+='<li>'+esc(s)+'</li>';});
+      h+='</ul>';
+    }
+
+    // intervyu
+    if(ivOn&&ivOn.checked){
+      var pairs=[[q1,a1],[q2,a2]].map(function(p){return [tr(p[0]&&p[0].value), tr(p[1]&&p[1].value)];}).filter(function(p){return p[0]&&p[1];});
+      if(pairs.length){
+        h+='<p class="c-sub">интервью</p>';
+        pairs.forEach(function(p){h+='<p class="c-q">— '+esc(lc(p[0]))+'</p><p>'+esc(p[1])+'</p>';});
+      }
+    }
+
+    // neskolko slov
+    h+='<p class="c-sub">несколько слов</p><p>этот выпуск — чтобы <b>'+nm+'</b> однажды '+G('открыл','открыла')+' его и '+G('почувствовал','почувствовала')+': '+G('его','её')+' путь важен, и рядом есть люди, которые это видят и хранят.</p>';
+
+    bodyEl.innerHTML=h;
+  }
+
+  [nameEl,occEl,lifeEl,pathEl,strEl,a1,a2].forEach(function(el){if(el)el.addEventListener('input',render);});
+  [q1,q2].forEach(function(el){if(el)el.addEventListener('change',render);});
+  Array.prototype.forEach.call(document.querySelectorAll('input[name="c-g"]'),function(el){el.addEventListener('change',render);});
+  render();
 })();
 </script>
 <!-- фоновое музыкальное сопровождение «связаны» -->
