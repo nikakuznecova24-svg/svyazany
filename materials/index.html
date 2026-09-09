@@ -66,8 +66,9 @@ a:hover{border-bottom-color:var(--wine)}
 .frame .corner.br{bottom:-2px;right:-2px;transform:scale(-1)}
 
 header{text-align:center;margin-bottom:14px}
-header .brand{font-family:'Mrs Saint Delafield', cursive;font-size:44px;color:var(--wine);line-height:.9}
-header .tagline{font-family:'Cormorant Garamond', serif;font-style:italic;color:var(--ink-soft);letter-spacing:.06em;margin-top:6px}
+header .brand{display:block;width:min(260px,64vw);margin:0 auto}
+header .tagline{font-family:'Cormorant Garamond', serif;font-style:italic;color:var(--ink-soft);letter-spacing:.06em;margin-top:10px}
+.foot-logo{display:block;width:min(190px,52vw);margin:0 auto 6px}
 
 .intro{text-align:center;margin:30px 0 8px}
 
@@ -116,7 +117,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--wine)}
 .spread .rubric{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink-soft);text-align:center;letter-spacing:.08em;margin-bottom:18px}
 .spread .body{font-family:'EB Garamond',serif;font-size:18px;line-height:1.7;color:var(--ink)}
 .spread .body b{color:var(--wine-deep)}
-.spread .sign{font-family:'Mrs Saint Delafield',cursive;font-size:30px;color:var(--wine);text-align:right;margin-top:16px;line-height:1}
+.spread .sign{display:block;width:120px;margin:18px 0 0 auto}
 
 .music{display:flex;align-items:center;gap:12px;justify-content:center;margin:8px 0 0;font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink-soft)}
 .music button{
@@ -134,7 +135,7 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
 <div class="wrap">
 
   <header>
-    <div class="brand">связаны</div>
+    <img class="brand" src="assets/logo.png" alt="связаны">
     <div class="tagline">персональные журналы и книги о людях и о связи</div>
   </header>
 
@@ -222,21 +223,11 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
       <div class="who" id="p-who">Имя</div>
       <div class="rubric" id="p-occ">слово редактора</div>
       <div class="body" id="p-body">Здесь появится тёплый разворот о твоём человеке — как только ты впишешь пару фактов выше.</div>
-      <div class="sign">связаны</div>
+      <img class="sign" src="assets/logo.png" alt="связаны">
     </div>
   </section>
 
   <hr class="hairline">
-
-  <!-- МУЗЫКА -->
-  <section>
-    <div class="music">
-      <span>мелодия «Связаны»</span>
-      <button id="mbtn" type="button">включить</button>
-    </div>
-    <p class="small" style="text-align:center;margin-top:10px">включается по желанию, тихо, фоном</p>
-    <audio id="mel" loop preload="none" src="assets/svyazany-melody.mp3"></audio>
-  </section>
 
   <hr class="hairline">
 
@@ -251,7 +242,7 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
   </section>
 
   <footer>
-    <div class="script">связаны</div>
+    <img class="foot-logo" src="assets/logo.png" alt="связаны">
     <p class="small">книги и журналы, которые соединяют людей страницами</p>
   </footer>
 
