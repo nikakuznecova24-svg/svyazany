@@ -3480,6 +3480,9 @@ document.addEventListener('keydown', (e) => {
 #svz-music.playing{background:#6B1F33;color:#FFFBF6;box-shadow:0 0 0 6px rgba(107,31,51,0.10)}
 #svz-music:hover{box-shadow:0 4px 18px rgba(107,31,51,0.28)}
 @media(max-width:640px){#svz-music{width:42px;height:42px;right:14px;bottom:16px;font-size:18px}}
+/* на страницах продуктов поднять над нижней панелью заказа */
+body.overlay-open #svz-music{bottom:90px}
+@media(max-width:640px){body.overlay-open #svz-music{bottom:84px}}
 </style>
 <script>
 (function(){
