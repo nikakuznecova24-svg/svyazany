@@ -245,8 +245,8 @@ body{background-image:url("assets/paper.png"),
 /* обложка */
 .hero-triptych{display:block;width:100%;max-width:540px;margin:22px auto 18px}
 
-#c-body>p:first-child{margin-top:6px}
-#c-body>p:first-child::first-letter{float:left;font-family:'Fraunces',serif;font-weight:400;font-size:2.7em;line-height:0.86;color:var(--wine);margin:0.02em 0.12em 0 0}
+#c-body>p:first-child:not(.c-hint){margin-top:6px}
+#c-body>p:first-child:not(.c-hint)::first-letter{float:left;font-family:'Fraunces',serif;font-weight:400;font-size:2.7em;line-height:0.86;color:var(--wine);margin:0.02em 0.12em 0 0}
 /* объём карточек — многослойная мягкая тень */
 .paper{position:relative}
 .scroll,#c-spread{filter:drop-shadow(0 26px 46px rgba(90,26,43,0.20)) drop-shadow(0 8px 16px rgba(90,26,43,0.14)) drop-shadow(0 2px 4px rgba(90,26,43,0.10))}
