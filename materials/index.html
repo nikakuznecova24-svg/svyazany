@@ -70,17 +70,51 @@ header .brand{display:block;width:min(260px,64vw);margin:0 auto}
 header .tagline{font-family:'Cormorant Garamond', serif;color:var(--ink-soft);margin-top:10px}
 .foot-logo{display:block;width:min(190px,52vw);margin:0 auto 6px}
 
-.intro{text-align:center;margin:30px 0 8px}
-.qsub{font-family:'Cormorant Garamond', serif;font-size:20px;color:var(--wine);margin:-.2em 0 1.1em}
+/* block head: circle step + heading + subheading */
+.block-head{display:flex;align-items:flex-start;gap:16px;margin:6px 0 4px}
+.step{
+  flex:none;width:46px;height:46px;border-radius:50%;
+  background:var(--cream);border:1px solid var(--wine);color:var(--wine);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;font-size:22px;line-height:1;margin-top:4px
+}
+h1.big{font-size:clamp(24px,5vw,36px);text-transform:uppercase;line-height:1.16;margin:0 0 .35em}
+.qsub{font-family:'Cormorant Garamond', serif;font-size:clamp(17px,3vw,20px);color:var(--ink-soft);margin:0 0 1.1em}
 
-/* guide list */
-.group-label{font-family:'Fraunces',serif;color:var(--wine);font-size:22px;margin:30px 0 10px}
+/* questions — deep wine editorial panel */
+.scroll{
+  position:relative;
+  background:var(--wine);
+  background-image:
+    radial-gradient(600px circle at 12% 0%, rgba(255,251,246,0.06), transparent 55%),
+    radial-gradient(600px circle at 90% 100%, rgba(255,251,246,0.05), transparent 55%);
+  color:var(--cream);
+  border:1px solid var(--wine-deep);
+  box-shadow:0 0 0 1px rgba(255,251,246,0.14) inset, 0 10px 40px rgba(90,26,43,0.25);
+  padding:44px 34px 40px;
+  margin:30px 0
+}
+.scroll .vine{position:absolute;width:64px;height:64px;color:rgba(255,251,246,0.55)}
+.scroll .vine.tl{top:12px;left:12px}
+.scroll .vine.br{bottom:12px;right:12px;transform:rotate(180deg)}
+.grp{
+  text-align:center;font-family:'Fraunces',serif;text-transform:uppercase;
+  font-size:15px;color:rgba(255,251,246,0.75);
+  margin:30px 0 8px
+}
+.grp span{color:rgba(255,251,246,0.5);margin:0 10px}
+.grp:first-of-type{margin-top:6px}
 ol.guide{margin:0;padding:0;list-style:none;counter-reset:q}
-ol.guide li{counter-increment:q;position:relative;padding:11px 0 11px 46px;border-bottom:1px dotted rgba(107,31,51,0.25)}
+ol.guide li{
+  counter-increment:q;position:relative;padding:12px 0 12px 44px;
+  border-bottom:1px solid rgba(255,251,246,0.18);
+  font-family:'EB Garamond',serif;font-size:17px;line-height:1.55;color:var(--cream)
+}
+ol.guide li:last-child{border-bottom:0}
 ol.guide li::before{
-  content:counter(q);position:absolute;left:0;top:9px;
-  font-family:'Fraunces',serif;font-size:20px;color:var(--rose);
-  width:32px;text-align:right
+  content:counter(q);position:absolute;left:0;top:10px;
+  font-family:'Fraunces',serif;font-size:19px;color:rgba(255,251,246,0.55);
+  width:30px;text-align:right
 }
 
 .btnrow{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:26px 0 4px}
@@ -140,23 +174,23 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
     <div class="tagline">персональные журналы и книги о людях и о связи</div>
   </header>
 
-  <div class="intro">
-    <h1>между вами есть связь</h1>
-    <p class="lead">её можно прожить глубже — медленно, внимательно,<br>по-настоящему разглядев своего человека.</p>
-  </div>
-
   <hr class="hairline">
 
   <!-- ГАЙД -->
   <section>
-    <h2>настоящая близость начинается там,<br>где ты по-настоящему видишь другого</h2>
-    <p class="qsub">15 вопросов, чтобы узнать близкого по-настоящему</p>
+    <div class="block-head">
+      <span class="step">1</span>
+      <div>
+        <h1 class="big">15 вопросов,<br>чтобы узнать близкого по-настоящему</h1>
+        <p class="qsub">настоящая близость начинается там, где ты по-настоящему видишь другого</p>
+      </div>
+    </div>
 
-    <div class="frame">
-      <span class="corner tl">&#10086;</span><span class="corner tr">&#10086;</span>
-      <span class="corner bl">&#10086;</span><span class="corner br">&#10086;</span>
+    <div class="scroll">
+      <svg class="vine tl" viewBox="0 0 80 80" aria-hidden="true"><path d="M6 74 C6 46 20 40 30 34 C42 27 40 14 52 8 M30 34 C22 30 18 22 20 14 M30 34 C36 30 44 32 48 40 M52 8 C56 12 56 20 52 24 M52 8 C48 6 42 8 40 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="20" cy="14" r="2.4" fill="currentColor"/><circle cx="48" cy="40" r="2.4" fill="currentColor"/><circle cx="52" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+      <svg class="vine br" viewBox="0 0 80 80" aria-hidden="true"><path d="M6 74 C6 46 20 40 30 34 C42 27 40 14 52 8 M30 34 C22 30 18 22 20 14 M30 34 C36 30 44 32 48 40 M52 8 C56 12 56 20 52 24 M52 8 C48 6 42 8 40 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="20" cy="14" r="2.4" fill="currentColor"/><circle cx="48" cy="40" r="2.4" fill="currentColor"/><circle cx="52" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
 
-      <div class="group-label">Путь и характер</div>
+      <p class="grp"><span>&#10047;</span> путь и характер <span>&#10047;</span></p>
       <ol class="guide">
         <li>С чего начался его путь — какие люди и события сделали его тем, кто он есть?</li>
         <li>Каким он был в детстве? Что из того ребёнка осталось в нём сейчас?</li>
@@ -167,7 +201,7 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
         <li>Какая у него привычка или странность, за которую его любят?</li>
       </ol>
 
-      <div class="group-label">Вы вдвоём</div>
+      <p class="grp"><span>&#10047;</span> вы вдвоём <span>&#10047;</span></p>
       <ol class="guide" start="8">
         <li>Когда ты видел его по-настоящему сильным?</li>
         <li>Что он даёт людям — что они чувствуют рядом с ним?</li>
@@ -176,7 +210,7 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
         <li>Что ты понял о нём не сразу, а со временем?</li>
       </ol>
 
-      <div class="group-label">Чувства и будущее</div>
+      <p class="grp"><span>&#10047;</span> чувства и будущее <span>&#10047;</span></p>
       <ol class="guide" start="13">
         <li>Что ты никогда не говорил ему вслух, но хотел бы?</li>
         <li>Каким ты видишь его через пять лет? Чего ему желаешь?</li>
@@ -193,9 +227,14 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
 
   <!-- МИНИ-КОНСТРУКТОР -->
   <section>
-    <h2>Мини-конструктор разворота</h2>
-    <p>Впиши имя и несколько фактов — и увидишь, как это выглядело бы
-       на странице твоего журнала «Связаны». Ничего не сохраняется, это просто набросок для тебя.</p>
+    <div class="block-head">
+      <span class="step">2</span>
+      <div>
+        <h1 class="big">мини-конструктор разворота</h1>
+        <p class="qsub">впиши имя и несколько фактов — и увидишь набросок страницы о нём</p>
+      </div>
+    </div>
+    <p class="small">ничего не сохраняется, это просто эскиз для тебя.</p>
 
     <div class="field">
       <label for="who">Имя человека</label>
