@@ -478,11 +478,15 @@ body{background-image:url("assets/paper.png"),
   }
 
   function capFirst(s){s=tr(s);return s?s.charAt(0).toUpperCase()+s.slice(1):s;}
+  function capS(s){if(!s)return s;
+    s=s.replace(/^(\s*(?:<b>)?\s*[—–-]?\s*)([а-яёa-z])/,function(_,p,c){return p+c.toUpperCase();});
+    return s.replace(/([.!?]\s+(?:<b>)?)([а-яёa-z])/g,function(_,p,c){return p+c.toUpperCase();});
+  }
 
   function render(){
     var raw=trimPunct(nameEl.value);
     var name=lc(raw);
-    var nm=esc(name||'имя');
+    var nm=esc(capFirst(name||'имя'));
     var life=trimPunct(lifeEl.value);
     var path=trimPunct(pathEl.value);
     var strs=(strEl.value||'').split(',').map(function(x){return lc(trimPunct(x));}).filter(Boolean).slice(0,7);
@@ -501,10 +505,10 @@ body{background-image:url("assets/paper.png"),
     var INTRO=[
       'есть люди, рядом с которыми становится тише и теплее. <b>'+nm+'</b> — из таких, и эта страница — попытка сказать вслух то, что обычно молчишь.',
       'кажется, что близких знаешь наизусть. а сядешь собрать про них книгу — и понимаешь, сколько осталось несказанным. <b>'+nm+'</b> — из таких людей.',
-      '<b>'+nm+'</b> — вот про кого эта страница: про то, что за этим человеком стоит и что хочется сохранить, пока всё это рядом.',
+      'эта страница — про <b>'+nm+'</b>: про то, что стоит за этим человеком и что хочется сохранить, пока всё это рядом.',
       'иногда любовь проще показать, чем сказать словами. но <b>'+nm+'</b> заслуживает, чтобы это прозвучало.'
     ];
-    h+='<p>'+pick(INTRO,seed+'i')+'</p>';
+    h+='<p>'+capS(pick(INTRO,seed+'i'))+'</p>';
 
     if(life){
       var LIFE_GEN=[
@@ -513,10 +517,10 @@ body{background-image:url("assets/paper.png"),
         'для кого-то это просто работа, а для этого человека — способ оставаться собой.',
         'вроде бы ничего особенного — а вглядишься, и виден весь человек.'
       ];
-      h+='<p class="c-sub">чем живёт сейчас</p><p>'+esc(life)+'.</p>';
+      h+='<p class="c-sub">чем живёт сейчас</p><p>'+capS(esc(life)+'.')+'</p>';
       var lt=theme(lifeEl.value||'');
-      if(lt) h+='<p>'+lt+'</p>';
-      h+='<p>'+pick(LIFE_GEN,seed+'lg')+'</p>';
+      if(lt) h+='<p>'+capS(lt)+'</p>';
+      h+='<p>'+capS(pick(LIFE_GEN,seed+'lg'))+'</p>';
     }
 
     if(path){
@@ -526,10 +530,10 @@ body{background-image:url("assets/paper.png"),
         'кто прошёл такое и не озлобился — тот сильнее, чем '+G('сам','сама')+' о себе думает.',
         'и если сейчас всё позади, а человек рядом — значит, хватило сил.'
       ];
-      h+='<p class="c-sub">дорога, которая позади</p><p>'+esc(path)+'.</p>';
+      h+='<p class="c-sub">дорога, которая позади</p><p>'+capS(esc(path)+'.')+'</p>';
       var st=situation(pathEl.value||'') || theme(pathEl.value||'');
-      if(st) h+='<p>'+st+'</p>';
-      h+='<p>'+pick(PATH_GEN,seed+'pg')+'</p>';
+      if(st) h+='<p>'+capS(st)+'</p>';
+      h+='<p>'+capS(pick(PATH_GEN,seed+'pg'))+'</p>';
     }
 
     if(strs.length){
@@ -538,14 +542,14 @@ body{background-image:url("assets/paper.png"),
         'такое обычно не говорят в лицо. а стоило бы.',
         'с этими качествами живётся спокойнее — и тем, кто рядом, тоже.'
       ];
-      h+='<p class="c-sub">'+G('какой он','какая она')+'</p><p>если спросить тех, кто рядом, получится примерно так:</p><ul class="c-list">';
+      h+='<p class="c-sub">'+G('какой он','какая она')+'</p><p>Если спросить тех, кто рядом, получится примерно так:</p><ul class="c-list">';
       strs.forEach(function(s){h+='<li>'+esc(s)+'</li>';});
-      h+='</ul><p>'+pick(STR_END,seed+'se')+'</p>';
+      h+='</ul><p>'+capS(pick(STR_END,seed+'se'))+'</p>';
     }
 
     if(iva){
       h+='<p class="c-sub">интервью</p>';
-      h+='<p class="c-q">— какой момент '+G('с ним','с ней')+' хочется прожить ещё раз</p><p>'+esc(iva)+'</p>';
+      h+='<p class="c-q">— Какой момент '+G('с ним','с ней')+' хочется прожить ещё раз</p><p>'+capS(esc(iva))+'</p>';
     }
 
     var CLOSE=[
@@ -554,7 +558,7 @@ body{background-image:url("assets/paper.png"),
       'самый тёплый подарок — не вещь, а внимание, собранное в страницы. <b>'+nm+'</b> возьмёт такую книгу и поймёт, что этого человека по-настоящему знают.',
       'и если сейчас внутри что-то дрогнуло — значит, <b>'+nm+'</b> правда стоит такой книги. соберём её вместе, бережно.'
     ];
-    h+='<p class="c-sub">несколько слов</p><p>'+pick(CLOSE,seed+'c')+'</p>';
+    h+='<p class="c-sub">несколько слов</p><p>'+capS(pick(CLOSE,seed+'c'))+'</p>';
 
     bodyEl.innerHTML=h;
   }
@@ -609,7 +613,7 @@ body{background-image:url("assets/paper.png"),
     var F_BODY=(15.5*S)+"px 'EB Garamond', Georgia, serif";
     // ── собрать операции ──
     var ops=[], y=0, firstBody=true;
-    y+=44*S; // отступ сверху под логотип
+    y+=90*S; // отступ сверху под логотип
     ops.push({t:'title',s:who.textContent,y:y}); y+=34*S+10*S;
     var kids=body.children;
     for(var i=0;i<kids.length;i++){
@@ -663,7 +667,7 @@ body{background-image:url("assets/paper.png"),
       var lg=$('c-spread') && $('c-spread').querySelector('img.sign');
       if(lg && lg.complete && lg.naturalWidth){
         tintLogo(lg,function(oc){
-          if(oc){var lw=150*S, lh=lw*oc.height/oc.width; m.drawImage(oc,x,24*S,lw,lh);}
+          if(oc){var lw=74*S, lh=lw*oc.height/oc.width; m.drawImage(oc,26*S,22*S,lw,lh);}
           cb(mc);
         });
       } else { cb(mc); }
