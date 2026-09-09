@@ -87,21 +87,13 @@ h1.big{font-size:clamp(24px,5vw,36px);line-height:1.16;margin:0 0 .35em}
   position:relative;
   background:var(--wine);
   color:var(--cream);
-  border:1px solid rgba(255,251,246,0.35);
-  padding:64px 50px 60px;
+  border-style:solid;
+  border-width:66px 62px;
+  border-image:url("assets/rose-frame.png") 150 112 / 66px 62px / 0 round;
+  padding:6px 8px 8px;
   margin:30px 0
 }
-.scroll::before{
-  content:"";position:absolute;inset:7px;
-  border:1px solid rgba(255,251,246,0.22);pointer-events:none
-}
-.scroll .c{position:absolute;width:92px;height:auto;pointer-events:none;opacity:.9}
-.scroll .c.tl{top:-8px;left:-8px}
-.scroll .c.tr{top:-8px;right:-8px;transform:scaleX(-1)}
-.scroll .c.bl{bottom:-8px;left:-8px;transform:scaleY(-1)}
-.scroll .c.br{bottom:-8px;right:-8px;transform:scale(-1)}
-.scroll > *:not(.c){position:relative}
-@media(max-width:640px){.scroll{padding:44px 28px 40px}.scroll .c{width:64px}}
+@media(max-width:640px){.scroll{border-width:46px 34px;border-image-width:46px 34px}}}
 
 
 
@@ -196,7 +188,6 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
     </div>
 
     <div class="scroll">
-      <img class="c tl" src="assets/rose-corner.png" alt=""><img class="c tr" src="assets/rose-corner.png" alt=""><img class="c bl" src="assets/rose-corner.png" alt=""><img class="c br" src="assets/rose-corner.png" alt="">
 
       <p class="grp">путь и характер</p>
       <ol class="guide">
