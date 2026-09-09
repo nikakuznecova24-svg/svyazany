@@ -408,7 +408,6 @@ body{background-image:url("assets/paper.png"),
 
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
 (function(){
   var $=function(id){return document.getElementById(id);};
@@ -581,23 +580,102 @@ body{background-image:url("assets/paper.png"),
     render(); nameEl.focus();
   });
 
-  // сохранить эскиз картинкой
+  // сохранить эскиз картинкой — рисуем вручную, пиксель-в-пиксель как на странице
+  function wrapLine(ctx,text,maxw){
+    var words=(text||'').split(/\s+/),lines=[],cur='';
+    for(var i=0;i<words.length;i++){
+      var t=cur?cur+' '+words[i]:words[i];
+      if(ctx.measureText(t).width<=maxw||!cur){cur=t;}else{lines.push(cur);cur=words[i];}
+    }
+    if(cur)lines.push(cur);
+    return lines.length?lines:[''];
+  }
+  function tintLogo(imgEl,cb){
+    try{
+      var oc=document.createElement('canvas');oc.width=imgEl.naturalWidth;oc.height=imgEl.naturalHeight;
+      var octx=oc.getContext('2d');octx.drawImage(imgEl,0,0);
+      var d=octx.getImageData(0,0,oc.width,oc.height),p=d.data;
+      for(var i=0;i<p.length;i+=4){if(p[i+3]>0){p[i]=0x6B;p[i+1]=0x1F;p[i+2]=0x33;}}
+      octx.putImageData(d,0,0);cb(oc);
+    }catch(e){cb(null);}
+  }
+  function drawSpread(cb){
+    var body=$('c-body'),who=$('c-who'); if(!body||!who){cb(null);return;}
+    var S=2, W=720*S, PAD=48*S, x=PAD, maxw=W-PAD*2;
+    var mc=document.createElement('canvas'),m=mc.getContext('2d');
+    var WINE='#6B1F33',WINED='#5A1A2B',INK='#2B211C',INKS='#5A4F47';
+    var F_TITLE="700 "+(30*S)+"px 'Fraunces', Georgia, serif";
+    var F_SUB=(15*S)+"px 'Cormorant Garamond', Georgia, serif";
+    var F_BODY=(15.5*S)+"px 'EB Garamond', Georgia, serif";
+    // ── собрать операции ──
+    var ops=[], y=0;
+    y+=44*S; // отступ сверху под логотип
+    ops.push({t:'title',s:who.textContent,y:y}); y+=34*S+10*S;
+    var kids=body.children;
+    for(var i=0;i<kids.length;i++){
+      var el=kids[i], txt=el.textContent.replace(/\s+/g,' ').trim();
+      if(!txt) continue;
+      if(el.classList.contains('c-hint')) continue;
+      if(el.classList.contains('c-sub')){
+        y+=18*S; ops.push({t:'sub',s:txt,y:y}); y+=20*S;
+      } else if(el.tagName==='UL'){
+        var lis=el.querySelectorAll('li');
+        m.font=F_BODY;
+        for(var k=0;k<lis.length;k++){
+          var lt='—  '+lis[k].textContent.replace(/\s+/g,' ').trim();
+          var ll=wrapLine(m,lt,maxw);
+          for(var q=0;q<ll.length;q++){ops.push({t:'body',s:ll[q],y:y});y+=22*S;}
+        }
+        y+=4*S;
+      } else {
+        var cls=el.classList.contains('c-q')?'q':'body';
+        m.font=F_BODY;
+        var lines=wrapLine(m,txt,maxw);
+        for(var j=0;j<lines.length;j++){ops.push({t:cls,s:lines[j],y:y});y+=22*S;}
+        y+=7*S;
+      }
+    }
+    y+=40*S;
+    var H=y;
+    // ── рисуем ──
+    mc.width=W; mc.height=H;
+    m.fillStyle='#FDFBF6'; m.fillRect(0,0,W,H);
+    m.strokeStyle='rgba(107,31,51,0.20)'; m.lineWidth=1*S;
+    m.strokeRect(1*S,1*S,W-2*S,H-2*S);
+    m.textBaseline='alphabetic';
+    function paint(){
+      for(var i=0;i<ops.length;i++){
+        var o=ops[i];
+        if(o.t==='title'){m.font=F_TITLE;m.fillStyle=WINE;m.textAlign='center';m.fillText(o.s,W/2,o.y);m.textAlign='left';}
+        else if(o.t==='sub'){m.font=F_SUB;m.fillStyle=WINE;m.fillText(o.s,x,o.y);
+          var tw=m.measureText(o.s).width; m.strokeStyle='rgba(107,31,51,0.26)';m.lineWidth=1*S;
+          m.beginPath();m.moveTo(x+tw+10*S,o.y-4*S);m.lineTo(W-PAD,o.y-4*S);m.stroke();}
+        else if(o.t==='q'){m.font=F_BODY;m.fillStyle=WINED;m.fillText(o.s,x,o.y);}
+        else {m.font=F_BODY;m.fillStyle=INK;m.fillText(o.s,x,o.y);}
+      }
+      // логотип винный вверху слева
+      var lg=$('c-spread') && $('c-spread').querySelector('img.sign');
+      if(lg && lg.complete && lg.naturalWidth){
+        tintLogo(lg,function(oc){
+          if(oc){var lw=150*S, lh=lw*oc.height/oc.width; m.drawImage(oc,x,24*S,lw,lh);}
+          cb(mc);
+        });
+      } else { cb(mc); }
+    }
+    if(document.fonts && document.fonts.ready){document.fonts.ready.then(paint);} else {paint();}
+  }
   var sv=$('c-save');
   if(sv) sv.addEventListener('click',function(){
-    var node=$('c-spread'); if(!node||typeof html2canvas!=='function'){ if(sv) sv.textContent='не получилось — сделай скриншот'; return; }
     var label=sv.textContent; sv.textContent='готовлю…';
     var reset=function(t){sv.textContent=t||label;};
-    html2canvas(node,{backgroundColor:'#FDFBF6',scale:2,useCORS:true,logging:false,removeContainer:true,
-      onclone:function(doc){
-        var s=doc.getElementById('c-spread');
-        if(s){s.style.cssText='background:#FDFBF6;border:1px solid rgba(107,31,51,0.18);border-radius:16px;box-shadow:none;filter:none;-webkit-mask:none;mask:none;padding:30px 28px;position:relative;font-family:\'EB Garamond\',serif;color:#2B211C';}
-      }
-    }).then(function(canvas){
-      var url;
-      try{ url=canvas.toDataURL('image/png'); }catch(e){ reset('не получилось — сделай скриншот'); return; }
-      var a=document.createElement('a'); a.download='связаны-эскиз.png'; a.href=url;
-      document.body.appendChild(a); a.click(); a.remove(); reset();
-    }).catch(function(){ reset('не получилось — сделай скриншот'); });
+    try{
+      drawSpread(function(mc){
+        if(!mc){reset('не получилось — сделай скриншот');return;}
+        var url; try{url=mc.toDataURL('image/png');}catch(e){reset('не получилось — сделай скриншот');return;}
+        var a=document.createElement('a');a.download='связаны-эскиз.png';a.href=url;
+        document.body.appendChild(a);a.click();a.remove();reset();
+      });
+    }catch(e){reset('не получилось — сделай скриншот');}
   });
 
   render();
