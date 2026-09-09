@@ -343,7 +343,13 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
       var old=saveBtn.textContent; saveBtn.textContent='готовлю…'; saveBtn.disabled=true;
       var done=function(){ saveBtn.textContent=old; saveBtn.disabled=false; };
       (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(function(){
-        return html2canvas(card,{scale:2,backgroundColor:'#FFFBF6',useCORS:true,logging:false});
+        return html2canvas(card,{
+          scale:2, backgroundColor:'#FAF6F1', useCORS:true, allowTaint:true, logging:false,
+          onclone:function(doc){
+            var el=doc.querySelector('.scroll');
+            if(el){ el.style.backgroundImage='none'; el.style.background='#FAF6F1'; el.style.boxShadow='none'; }
+          }
+        });
       }).then(function(canvas){
         canvas.toBlob(function(blob){
           var url=URL.createObjectURL(blob);
@@ -353,7 +359,7 @@ footer{text-align:center;margin-top:20px;color:var(--ink-soft);font-family:'Corm
           setTimeout(function(){URL.revokeObjectURL(url);},1000);
           done();
         },'image/png');
-      }).catch(function(){ saveBtn.textContent='не получилось, попробуйте ещё раз'; setTimeout(done,2000); });
+      }).catch(function(e){ saveBtn.textContent='не получилось — сделайте скриншот'; setTimeout(done,2500); });
     });
   }
 
