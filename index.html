@@ -712,49 +712,6 @@ main{padding-top:72px;}
 .reviews-slide{flex:0 0 100%;padding:0 6px;box-sizing:border-box;}
 .reviews-slide .review-card{height:100%;}
 
-.video-cta{display:inline-flex;align-items:center;}
-
-/* ===== VIDEO MODAL ===== */
-.video-modal-overlay{
-  display:none;
-  position:fixed;inset:0;
-  background:rgba(42,33,28,0.72);
-  z-index:2000;
-  align-items:center;justify-content:center;
-  padding:24px;
-}
-.video-modal-overlay.open{display:flex;}
-.video-modal{
-  background:var(--wine-deep);
-  border-radius:6px;
-  max-width:640px;width:100%;
-  position:relative;
-  box-shadow:0 30px 60px rgba(0,0,0,0.4);
-  animation:fadeIn .3s ease;
-}
-.video-modal-body{padding:44px 36px 40px;}
-.video-modal-close{
-  position:absolute;top:16px;right:18px;
-  background:none;border:none;
-  color:#FFFBF6;font-size:18px;cursor:pointer;
-  width:32px;height:32px;
-  display:flex;align-items:center;justify-content:center;
-  border-radius:50%;
-  transition:background .2s;
-}
-.video-modal-close:hover{background:rgba(244,238,225,0.12);}
-.video-placeholder{
-  margin-top:18px;
-  aspect-ratio:16/9;
-  background:rgba(244,238,225,0.06);
-  border:1px dashed rgba(244,238,225,0.3);
-  border-radius:4px;
-  display:flex;align-items:center;justify-content:center;
-  text-align:center;
-  padding:24px;
-}
-.video-placeholder p{color:#FFFBF6;font-size:17px;line-height:1.4;}
-
 /* ===== FAQ ===== */
 .faq-list{max-width:780px;margin:0 auto 20px;display:flex;flex-direction:column;gap:16px;}
 .faq-item{
@@ -1603,18 +1560,6 @@ i,em,cite,address{font-style:normal}
 
   </section>
 
-  <!-- ============ VIDEO MODAL ============ -->
-  <div id="videoModalOverlay" class="video-modal-overlay">
-    <div class="video-modal">
-      <button type="button" id="closeVideoModal" class="video-modal-close" aria-label="Закрыть">✕</button>
-      <div class="video-modal-body">
-        <p class="label" style="color:#FFFBF6;">Видео-отзыв</p>
-        <div class="video-placeholder">
-          <p>Здесь появится видео-отзыв клиента.<br>Вставьте embed-код или файл .mp4, когда он будет готов.</p>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- ============ PROCESS ============ -->
   <section class="view" id="view-process">
@@ -3302,29 +3247,6 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && friendshipDetailOverlay.classList.contains('open')) closeFriendshipOverlay();
 });
 
-// ---- Video reviews modal ----
-const videoModalOverlay = document.getElementById('videoModalOverlay');
-const openVideoModal = document.getElementById('openVideoModal');
-const closeVideoModal = document.getElementById('closeVideoModal');
-
-if (openVideoModal) {
-  openVideoModal.addEventListener('click', () => {
-    videoModalOverlay.classList.add('open');
-  });
-}
-if (closeVideoModal) {
-  closeVideoModal.addEventListener('click', () => {
-    videoModalOverlay.classList.remove('open');
-  });
-}
-if (videoModalOverlay) {
-  videoModalOverlay.addEventListener('click', (e) => {
-    if (e.target === videoModalOverlay) videoModalOverlay.classList.remove('open');
-  });
-}
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && videoModalOverlay) videoModalOverlay.classList.remove('open');
-});
 </script>
 <!-- фоновое музыкальное сопровождение «Связаны» -->
 <audio id="svz-mel" loop preload="none" src="assets/svyazany-melody.mp3"></audio>
