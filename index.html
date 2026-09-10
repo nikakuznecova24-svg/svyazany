@@ -962,35 +962,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .footer-links a:hover{color:#FFFBF6;}
 .footer-bottom{text-align:center;font-size:14px;color:rgba(244,238,225,0.55);border-top:1px solid rgba(244,238,225,0.15);padding-top:20px;}
 
-/* ===== AMBIENT SOUND TOGGLE ===== */
-.sound-toggle{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  z-index:1500;
-  width:46px;
-  height:46px;
-  border-radius:50%;
-  border:1px solid rgba(107,31,51,0.2);
-  background-color:#FFFBF6;
-  color:var(--wine-deep);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  box-shadow:0 8px 20px rgba(58,20,32,0.18);
-  transition:background-color .25s ease, color .25s ease, transform .2s ease;
-}
-.sound-toggle:hover{transform:translateY(-2px);}
-.sound-toggle[aria-pressed="true"]{background-color:var(--wine-deep);color:#FFFBF6;}
-.sound-icon-on{display:none;}
-.sound-toggle[aria-pressed="true"] .sound-icon-off{display:none;}
-.sound-toggle[aria-pressed="true"] .sound-icon-on{display:block;}
-@media(max-width:560px){
-  .sound-toggle{right:14px;bottom:14px;width:42px;height:42px;}
-}
-body.overlay-open .sound-toggle{display:none;}
-
 /* ===== PRODUCT DETAIL OVERLAY ===== */
 .product-overlay{
   display:none;
@@ -1399,19 +1370,6 @@ body.overlay-open .sound-toggle{display:none;}
 </style>
 <style>
 i,em,cite,address{font-style:normal}
-.fmtq{max-width:640px;margin:0 auto 46px;text-align:center}
-.fmtq-h{font-family:'Fraunces',serif;color:var(--wine);font-weight:400;font-size:clamp(22px,4vw,30px);margin:0 0 6px}
-.fmtq-sub{font-family:'Cormorant Garamond',serif;color:var(--ink-soft);font-size:18px;margin:0 0 22px}
-.fmtq-q{font-family:'Fraunces',serif;color:var(--wine);font-size:20px;margin:0 0 16px}
-.fmtq-opts{display:flex;flex-direction:column;gap:10px;align-items:center}
-.fmtq-opt{font-family:'EB Garamond',serif;font-size:16px;color:var(--wine);background:var(--cream);
-  border:1px solid var(--wine);border-radius:26px;padding:11px 22px;cursor:pointer;max-width:520px;width:100%;
-  transition:background .2s,color .2s}
-.fmtq-opt:hover{background:var(--wine);color:var(--cream)}
-.fmtq-res{font-family:'Fraunces',serif;color:var(--wine);font-size:clamp(20px,3.6vw,26px);margin:0 0 8px}
-.fmtq-desc{font-family:'EB Garamond',serif;color:var(--ink);font-size:17px;margin:0 0 18px;line-height:1.5}
-.fmtq-again{background:none;border:none;color:var(--ink-soft);font-family:'Cormorant Garamond',serif;font-size:16px;cursor:pointer;text-decoration:underline;margin-top:14px}
-.fmtq-prog{font-family:'Cormorant Garamond',serif;color:var(--ink-soft);font-size:15px;margin-bottom:10px}
 </style>
 </head>
 <body>
@@ -2904,21 +2862,6 @@ i,em,cite,address{font-style:normal}
   </div>
 </footer>
 
-<!-- ============ AMBIENT SOUND TOGGLE ============ -->
-<button type="button" id="soundToggle" class="sound-toggle" aria-label="Включить фоновую музыку" aria-pressed="false">
-  <svg class="sound-icon sound-icon-off" width="18" height="18" viewBox="0 0 24 24" fill="none">
-    <path d="M4 9v6h4l5 5V4L8 9H4Z" fill="currentColor"/>
-    <path d="M16 8l5 8M21 8l-5 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-  </svg>
-  <svg class="sound-icon sound-icon-on" width="18" height="18" viewBox="0 0 24 24" fill="none">
-    <path d="M4 9v6h4l5 5V4L8 9H4Z" fill="currentColor"/>
-    <path d="M16.5 8.5a5 5 0 0 1 0 7M19.5 6a9 9 0 0 1 0 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-  </svg>
-</button>
-<audio id="ambientAudio" loop preload="none">
-  <source src="assets/ambient.mp3" type="audio/mpeg">
-</audio>
-
 <script>
 // ---- Navigation (single-page smooth scroll) ----
 const views = document.querySelectorAll('.view');
@@ -3106,26 +3049,6 @@ orderForm.addEventListener('submit', async (e) => {
     if (oe) oe.classList.remove('active');
     orderForm.style.display = '';
   });
-
-// ---- Ambient sound toggle ----
-const soundToggle = document.getElementById('soundToggle');
-const ambientAudio = document.getElementById('ambientAudio');
-ambientAudio.volume = 0.4;
-
-soundToggle.addEventListener('click', () => {
-  if (ambientAudio.paused) {
-    ambientAudio.play().catch(() => {
-      // playback blocked or file missing — reset visual state
-      soundToggle.setAttribute('aria-pressed', 'false');
-    });
-    soundToggle.setAttribute('aria-pressed', 'true');
-    soundToggle.setAttribute('aria-label', 'Выключить фоновую музыку');
-  } else {
-    ambientAudio.pause();
-    soundToggle.setAttribute('aria-pressed', 'false');
-    soundToggle.setAttribute('aria-label', 'Включить фоновую музыку');
-  }
-});
 
 // ---- FAQ accordion ----
 const faqItems = document.querySelectorAll('.faq-item');
@@ -3437,61 +3360,6 @@ document.addEventListener('keydown', (e) => {
     var once=function(){a.play().then(function(){set(true);}).catch(function(){});document.removeEventListener('pointerdown',once);};
     document.addEventListener('pointerdown',once,{once:true});
   }}catch(e){}
-})();
-</script>
-<script>
-(function(){
-  var body=document.getElementById('fmtqBody'); if(!body) return;
-  var Q=[
-    ["кому подарок?",[
-      ["партнёру","lyubov"],
-      ["родителю, брату, сестре, взрослому другу","dusha"],
-      ["компании друзей или другу с общей историей","druzhba"],
-      ["ребёнку","skazka"],
-      ["себе","dusha"]]],
-    ["какой повод?",[
-      ["юбилей, важный этап, «просто хочу, чтобы знал»","dusha"],
-      ["годовщина, свадьба, день рождения партнёра","lyubov"],
-      ["трудный период, вернуть веру в себя","skazka"],
-      ["годовщина дружбы, проводы, сохранить общее","druzhba"]]],
-    ["что хочешь, чтобы человек почувствовал?",[
-      ["«мой путь важен, меня видят»","dusha"],
-      ["«нашу любовь видят, она настоящая»","lyubov"],
-      ["«я справлюсь, я герой своей истории»","skazka"],
-      ["«наша дружба — ценность»","druzhba"]]]
-  ];
-  var INFO={
-    dusha:["книга души","биография близкого: его путь, характер и слова тех, кто его любит."],
-    lyubov:["книга про любовь","про вас двоих: два голоса, ваши признания и общая история."],
-    skazka:["книга-сказка","история человека языком доброй сказки, чтобы поверить в себя."],
-    druzhba:["книга нашей дружбы","общая история компании или двоих друзей."]
-  };
-  var PRIO=["dusha","lyubov","skazka","druzhba"];
-  var score={dusha:0,lyubov:0,skazka:0,druzhba:0}, step=0;
-  function render(){
-    if(step<Q.length){
-      var q=Q[step];
-      body.innerHTML='<p class="fmtq-prog">'+(step+1)+' из 3</p><p class="fmtq-q">'+q[0]+'</p><div class="fmtq-opts"></div>';
-      var box=body.querySelector('.fmtq-opts');
-      q[1].forEach(function(o){
-        var b=document.createElement('button'); b.className='fmtq-opt'; b.type='button'; b.textContent=o[0];
-        b.addEventListener('click',function(){ score[o[1]]++; step++; render(); });
-        box.appendChild(b);
-      });
-    } else {
-      var best=Math.max(score.dusha,score.lyubov,score.skazka,score.druzhba);
-      var win=PRIO.filter(function(f){return score[f]===best;})[0];
-      var i=INFO[win];
-      body.innerHTML='<p class="fmtq-res">тебе подойдёт «'+i[0]+'»</p>'+
-        '<p class="fmtq-desc">'+i[1]+'</p>'+
-        '<a class="btn-primary" href="#view-portfolio" data-nav="portfolio">посмотреть форматы</a>'+
-        '<br><button type="button" class="fmtq-again">пройти заново</button>';
-      body.querySelector('.fmtq-again').addEventListener('click',function(){
-        score={dusha:0,lyubov:0,skazka:0,druzhba:0}; step=0; render();
-      });
-    }
-  }
-  render();
 })();
 </script>
 </body>
