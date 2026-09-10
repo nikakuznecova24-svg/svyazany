@@ -940,6 +940,9 @@ main{padding-top:72px;}
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--wine);outline-offset:2px;border-radius:2px;}
 
 .order-form .btn-primary{width:100%;text-align:center;margin-top:4px;}
+.order-form label.consent-check{flex-direction:row;align-items:flex-start;gap:10px;font-size:14px;color:var(--ink-soft);line-height:1.45;}
+.order-form label.consent-check input{width:18px;height:18px;flex:0 0 auto;margin-top:2px;padding:0;border:0;border-radius:0;background:none;accent-color:var(--wine);}
+.order-form label.consent-check a{color:var(--wine);text-decoration:underline;}
 .order-confirm{
   display:none;width:100%;text-align:center;
 }
@@ -1883,6 +1886,10 @@ i,em,cite,address{font-style:normal}
           </div>
           <label>Расскажите о поводе и человеке
             <textarea name="message" rows="5" required placeholder="для кого журнал, какой повод, что важно сохранить"></textarea>
+          </label>
+          <label class="consent-check">
+            <input type="checkbox" name="consent" required>
+            <span>Я согласен(а) с <a href="/privacy/" target="_blank" rel="noopener">политикой обработки персональных данных</a> и даю согласие на обработку моих данных для связи по заявке.</span>
           </label>
           <button type="submit" class="btn-primary" style="border:none;cursor:pointer;">Отправить заявку</button>
         </form>
